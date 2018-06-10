@@ -1,0 +1,16 @@
+{
+  "name": "33",
+  "revision": 3,
+  "description": "33",
+  "modelId": "22501",
+  "model": {
+    "id": "canvas",
+    "resourceId": "canvas",
+    "properties": {
+      "process_author": "步卓科技"
+    },
+    "stencilset": {
+      "namespace": "http://b3mn.org/stencilset/bpmn2.0#"
+    }
+  }
+}

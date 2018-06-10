@@ -1,0 +1,10 @@
+/target/
+/.settings/
+/.idea/
+/.vertx/
+
+.DS_Store
+.project
+.classpath
+.tern-project
+.iml

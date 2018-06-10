@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        自定义配置bean
+    -->
+    <bean id="createModels" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
+        <property name="name" value="createModels"/>
+        <property name="url" value="@activitiIp/repository/models"/>
+        <property name="method" value="post" />
+        <property name="head" >
+            <value><![CDATA[
+                    {
+                        "Accept":"application/json",
+                        "Content-Type":"application/json;charset=UTF-8"
+                    }
+            ]]></value>
+        </property>
+        <property name="body" >
+            <value><![CDATA[
+                    {
+                       "name":"@name",
+                       "key":"@key",
+                       "description":"@description"
+                    }
+            ]]></value>
+        </property>
+    </bean>
+
+    <bean id="userSysAccess" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
+        <property name="name" value="userSysAccess"/>
+        <property name="url" value="@ispIp/activiti/sysAccess/@username"/>
+        <property name="method" value="get" />
+        <property name="head" >
+            <value><![CDATA[
+                    {
+                        "Accept":"application/json",
+                        "Content-Type":"application/json;charset=UTF-8"
+                    }
+            ]]></value>
+        </property>
+    </bean>
+
+    <bean id="pushUser" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
+        <property name="name" value="pushUser"/>
+        <property name="url" value="@ispIp/activiti/pushUser"/>
+        <property name="method" value="post" />
+        <property name="head" >
+            <value><![CDATA[
+                    {
+                        "Accept":"application/json",
+                        "Content-Type":"application/json;charset=UTF-8"
+                    }
+            ]]></value>
+        </property>
+        <property name="body" >
+            <value><![CDATA[
+                    {
+                       "username":"@username",
+                       "applySystemCode":"@applySystemCode",
+                    }
+            ]]></value>
+        </property>
+    </bean>
+
+    <bean id="synuserresult" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
+        <property name="name" value="synuserresult"/>
+        <property name="url" value="http://127.0.0.1:7001/interfaces"/>
+        <property name="method" value="post" />
+        <property name="head" >
+            <value><![CDATA[
+                    {
+                        "Accept":"application/json",
+                        "Content-Type":"application/json;charset=UTF-8"
+                    }
+            ]]></value>
+        </property>
+        <property name="body" >
+            <value><![CDATA[
+                    {
+                       "system":"@system",
+                       "method":"synuserresult",
+                       "reqdata":[
+                              {
+                                 "status":"801",
+                                 "msg":"成功",
+                                 "username":"@username"
+                              }
+                         ]
+                    }
+            ]]></value>
+        </property>
+    </bean>
+</beans>

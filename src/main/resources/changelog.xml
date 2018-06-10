@@ -1,0 +1,8 @@
+<changeSet author="admin" id="1496901181769-1">
+    <createTable schemaName="ihome" tableName="test">
+        <column autoIncrement="true" name="id" type="INT">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="name" type="VARCHAR(10)"/>
+    </createTable>
+</changeSet>
