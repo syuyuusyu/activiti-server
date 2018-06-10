@@ -14,17 +14,25 @@ public class ApplyCountCompleteListener implements TaskListener {
 
     private static final long serialVersionUID = 1L;
 
+    @Override
     public void notify(DelegateTask delegateTask) {
+        DelegateExecution execution=delegateTask.getExecution();
+        synchronized (execution){
+            Integer applyCount = (Integer)execution.getVariable("applyCount");
+            System.out.println("applyCount = " + applyCount);
+            Integer a=applyCount+1;
+            System.out.println("a = " + a);
+            execution.setVariable("applyCount", a );
+        }
+//        synchronized (delegateTask){
+//            Integer applyCount = (Integer) delegateTask.getExecution().getVariable("applyCount");
+//            System.out.println("applyCount = " + applyCount);
+//            Integer a=applyCount+1;
+//            delegateTask.getExecution().setVariable("applyCount", a );
+//        }
 
-        Integer applyCount = (Integer) delegateTask.getVariable("applyCount");
-        System.out.println("applyCount = " + applyCount);
-        delegateTask.setVariable("applyCount", applyCount + 1);
+
     }
 
-    public void notify(DelegateExecution execution) throws Exception {
-        Integer applyCount = (Integer) execution.getVariable("applyCount");
-        System.out.println("applyCount = " + applyCount);
-        execution.setVariable("applyCount", applyCount + 1);
-    }
 }
 

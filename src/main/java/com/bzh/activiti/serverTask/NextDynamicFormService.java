@@ -75,6 +75,7 @@ public class NextDynamicFormService {
      * @param queryMap
      */
     public void businessInvoke(DelegateExecution execution,String invokeName,String queryMap){
+        System.out.println("queryMap = " + queryMap);
         //${nextDynamicFormService.formVariable(execution,"userSysAccess","{username:@applyUser}")}
         //${nextDynamicFormService.businessInvoke(execution,"pushUser","{username:@applyUser,applySystemCode:@applySystemCode}")}
         Matcher m= Pattern.compile("(@(\\w+))").matcher(queryMap);

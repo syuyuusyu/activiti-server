@@ -96,4 +96,10 @@ public class TestRestful {
         JsonResponseEntity jsonResponseEntity=trd.getResult(trd.invokeNames().get(0));
         //System.out.println("jsonResponseEntity.getArrayJson() = " + jsonResponseEntity.getArrayJson());
     }
+
+    @Test
+    public void test4(){
+        String queryMap = "{username:'admin',applySystemCode:'s09,s10'}";
+        JSONUtil.toMap(queryMap);
+    }
 }
