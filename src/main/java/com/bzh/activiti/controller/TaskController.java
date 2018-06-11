@@ -64,6 +64,12 @@ public class TaskController {
             taskService.complete(taskId,requestMap);
             map.put("success",true);
             map.put("msg","办理成功,流程进入下一环节");
+            if (requestMap.containsKey("message")){
+                String msg= (String) requestMap.get("message");
+                if("complete".equals(msg)){
+                    map.put("msg","办理成功,流程已全部完成");
+                }
+            }
         }catch (Exception e){
             map.put("success",false);
             map.put("msg",e.getMessage());

@@ -28,18 +28,10 @@ public class SynUserInvoke implements JavaDelegate{
         execution.setVariable("users",users);
         execution.setVariable("applyTotal",applySystemCode.split(",").length);
         execution.setVariable("applyCount",0);
-        execution.setVariable("user",users.stream().reduce((s1,s2)->s1+','+s2).get());
-        execution.setVariable("message","");
-//        InvokeEntity invokeEntity= (InvokeEntity) SpringUtil.getBean("pushUser");
-//        Map<String,String> queryMap=new HashMap<>();
-//        queryMap.put("username",username);
-//        queryMap.put("applySystemCode",applySystemCode);
-//        PropertiesConf propertiesConf= (PropertiesConf) SpringUtil.getBean("propertiesConf");
-//        queryMap.put("ispIp",propertiesConf.getIspIp());
-//        invokeEntity.setQueryMap(queryMap);
-//        RestFulIntergrated rfi=new RestFulIntergrated();
-//        final ThreadResultData trd=new ThreadResultData();
-//        rfi.invoke(invokeEntity,trd);
+        //execution.setVariable("user",users.stream().reduce((s1,s2)->s1+','+s2).get());
+//        execution.setVariable("message","");
+//        execution.setVariable("nextForm",null);
+
         log.info("调用同步用户接口完成!!");
 
 
