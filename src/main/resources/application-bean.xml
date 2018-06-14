@@ -31,7 +31,7 @@
 
     <bean id="userSysAccess" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
         <property name="name" value="userSysAccess"/>
-        <property name="url" value="@ispIp/activiti/sysAccess/@username"/>
+        <property name="url" value="@ispIp/activiti/sysAccess/@username/@isApply"/>
         <property name="method" value="get" />
         <property name="head" >
             <value><![CDATA[
@@ -60,6 +60,7 @@
                     {
                        "username":"@username",
                        "applySystemCode":"@applySystemCode",
+                       "opType":"@opType"
                     }
             ]]></value>
         </property>
@@ -81,10 +82,10 @@
             <value><![CDATA[
                     {
                        "system":"@system",
-                       "method":"synuserresult",
+                       "method":"@method",
                        "reqdata":[
                               {
-                                 "status":"801",
+                                 "status":"@status",
                                  "msg":"成功",
                                  "username":"@username"
                               }

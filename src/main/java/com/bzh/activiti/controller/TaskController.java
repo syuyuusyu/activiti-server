@@ -1,18 +1,12 @@
 package com.bzh.activiti.controller;
 
-import com.bzh.activiti.config.PropertiesConf;
-import com.bzh.activiti.util.SpringUtil;
-import ind.syu.restful.InvokeEntity;
-import ind.syu.restful.InvokeTimeOutException;
-import ind.syu.restful.RestFulIntergrated;
-import ind.syu.restful.ThreadResultData;
+
 import org.activiti.engine.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.rest.service.api.runtime.task.TaskResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -43,18 +37,25 @@ public class TaskController {
     @ResponseBody
     public List<TaskResponse> userTask(@PathVariable(name="userId") String userId){
 
+        List<Task> list=taskService.createTaskQuery().taskAssignee(userId).list();
+        list.addAll(taskService.createTaskQuery().taskCandidateUser(userId).list());
 
-//        return identityService.createGroupQuery().groupMember(userId).list()
-//                .stream()
-//                .map(G->G.getId())
-//                .map(G->taskService.createTaskQuery().taskCandidateGroup(G).list()).reduce(
-//                        taskService.createTaskQuery().taskCandidateUser(userId).list(),
-//                        (l1,l2)->{l1.addAll(l2);return l1;}
-//                        )
-//                .stream().map(TaskResponse::new).collect(Collectors.toList());
-        System.out.println("taskService.createTaskQuery().taskCandidateUser(userId).list().size() = " + taskService.createTaskQuery().taskCandidateUser(userId).list().size());
-        return taskService.createTaskQuery().taskCandidateUser(userId).list()
-                .stream().map(TaskResponse::new).collect(Collectors.toList());
+        return list.stream().map(TaskResponse::new).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/userTask/list",method = RequestMethod.GET)
+    @ResponseBody
+    public List<TaskResponse> teskList(){
+
+
+        return taskService.createTaskQuery().list()
+                .stream().map(TaskResponse::new)
+                .map(t->{
+                    String taskId=t.getId();
+
+                    return t;
+                })
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/userTask/submit/{taskId}",method = RequestMethod.POST)
@@ -64,9 +65,9 @@ public class TaskController {
             taskService.complete(taskId,requestMap);
             map.put("success",true);
             map.put("msg","办理成功,流程进入下一环节");
-            if (requestMap.containsKey("message")){
-                String msg= (String) requestMap.get("message");
-                if("complete".equals(msg)){
+            if (requestMap.containsKey("isLast")){
+                boolean isLast= (boolean) requestMap.get("isLast");
+                if(isLast){
                     map.put("msg","办理成功,流程已全部完成");
                 }
             }
@@ -96,9 +97,6 @@ public class TaskController {
         map.put("key",pi.getProcessDefinitionKey());
         return map;
     }
-
-
-
 
 }
 

@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.bzh.activiti.config.PropertiesConf;
 import com.bzh.activiti.entity.InvokeEntityImpl;
 import com.bzh.activiti.util.SpringUtil;
-import com.sun.javafx.tk.Toolkit;
 import ind.syu.restful.*;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -64,7 +63,12 @@ public class NextDynamicFormService {
             e.printStackTrace();
         }
         JsonResponseEntity jsonResponseEntity=trd.getResult(invokeName+"-1");
-        List<Map<String,Object>> list=JSONUtil.toListMap(jsonResponseEntity.getArrayJson());
+        Map<String,Object> result=JSONUtil.toMap(jsonResponseEntity.getArrayJson());
+        boolean unnecessary= (boolean) result.get("unnecessary");
+        String message= (String) result.get("message");
+        List<Map<String,Object>> list= (List<Map<String, Object>>) result.get("data");
+        execution.setVariable("unnecessary",unnecessary);
+        execution.setVariable("message",message);
         execution.setVariable("nextForm",list);
     }
 
@@ -88,6 +92,7 @@ public class NextDynamicFormService {
                 return;
             }
         }
+        System.out.println("queryMap = " + queryMap);
         Map<String,Object> map= JSONUtil.toMap(queryMap);
         Map<String,String> strmap=new HashMap<>();
         map.forEach((s,o)->{

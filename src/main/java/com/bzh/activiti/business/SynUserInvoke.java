@@ -22,9 +22,11 @@ public class SynUserInvoke implements JavaDelegate{
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Override
     public void execute(DelegateExecution execution) throws Exception {
+
         String username= (String) execution.getVariable("applyUser");
         String applySystemCode= (String) execution.getVariable("applySystemCode");
-        List<String> users= Arrays.stream(applySystemCode.split(",")).map(code->username+code).collect(Collectors.toList());
+        String opType=(String) execution.getVariable("opType");
+        List<String> users= Arrays.stream(applySystemCode.split(",")).map(code->username+code+opType).collect(Collectors.toList());
         execution.setVariable("users",users);
         execution.setVariable("applyTotal",applySystemCode.split(",").length);
         execution.setVariable("applyCount",0);
