@@ -32,7 +32,7 @@ ORYX.I18N.Save.saveAsDesc = "Kopie speichern...";
 ORYX.I18N.Save.saveAsTitle = "Kopie speichern...";
 ORYX.I18N.Save.savedAs = "Kopie gespeichert";
 ORYX.I18N.Save.savedDescription = "Das kopierte Diagramm ist unter folgendem Link gespeichert";
-ORYX.I18N.Save.notAuthorized = "Sie sind derzeit nicht angemeldet. Bitte melden Sie sich in einem <a href='/p/login' target='_blank'>neuen Fenstern</a> an, damit Sie diese Model speichern können."
+ORYX.I18N.Save.notAuthorized = "Sie sind derzeit nicht angemeldet. Bitte melden Sie sich in einem <a href='/p/login' target='_blank'>neuen Fenstern</a> an, damit Sie diese Model speichern können.";
 ORYX.I18N.Save.transAborted = "Die Anfrage zum Speichern Ihres Diagramms hat zu lange gedauert. Bitte benutzen Sie eine schnellere Internetverbindung. Wenn Sie eine kabellose Internetverbindung benutzen, dann überprüfen Sie bitte die Signalstärke.";
 ORYX.I18N.Save.noRights = "Sie haben nicht die benötigten Rechte, um das Diagramm abzuspeichern. Bitte überprüfen Sie im <a href='/p/explorer' target='_blank'>Signavio Explorer</a>, ob Sie noch die benötigten Rechte im Zielordner besitzen.";
 ORYX.I18N.Save.comFailed = "Die Kommunikation mit dem Signavio Server ist fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung. Wenn das Problem weiterhin besteht, wenden Sie sich bitte an den Signavio Support über das Briefumschlagssymbol in der Toolbar.";

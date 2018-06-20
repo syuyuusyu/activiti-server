@@ -29,7 +29,7 @@ var Prototype = {
 
   emptyFunction: function() { },
   K: function(x) { return x }
-}
+};
 
 var Class = {
   create: function() {
@@ -37,16 +37,16 @@ var Class = {
       this.initialize.apply(this, arguments);
     }
   }
-}
+};
 
-var Abstract = new Object();
+var Abstract = {};
 
 Object.extend = function(destination, source) {
   for (var property in source) {
     destination[property] = source[property];
   }
   return destination;
-}
+};
 
 Object.extend(Object, {
   inspect: function(object) {
@@ -104,14 +104,14 @@ Function.prototype.bind = function() {
   return function() {
     return __method.apply(object, args.concat($A(arguments)));
   }
-}
+};
 
 Function.prototype.bindAsEventListener = function(object) {
   var __method = this, args = $A(arguments), object = args.shift();
   return function(event) {
     return __method.apply(object, [event || window.event].concat(args));
   }
-}
+};
 
 Object.extend(Number.prototype, {
   toColorPart: function() {
@@ -160,7 +160,7 @@ var Try = {
 
     return returnValue;
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -194,7 +194,7 @@ PeriodicalExecuter.prototype = {
       }
     }
   }
-}
+};
 Object.extend(String, {
   interpret: function(value) {
     return value == null ? '' : String(value);
@@ -408,7 +408,7 @@ String.prototype.gsub.prepareReplacement = function(replacement) {
   if (typeof replacement == 'function') return replacement;
   var template = new Template(replacement);
   return function(match) { return template.evaluate(match) };
-}
+};
 
 String.prototype.parseQuery = String.prototype.toQueryParams;
 
@@ -434,7 +434,7 @@ Template.prototype = {
       return before + String.interpret(object[match[3]]);
     });
   }
-}
+};
 
 var $break = {}, $continue = new Error('"throw $continue" is deprecated, use "return" instead');
 
@@ -511,7 +511,7 @@ var Enumerable = {
       var stringValue = value.toString();
       if (stringValue.match(pattern))
         results.push((iterator || Prototype.K)(value, index));
-    })
+    });
     return results;
   },
 
@@ -625,7 +625,7 @@ var Enumerable = {
   inspect: function() {
     return '#<Enumerable:' + this.toArray().inspect() + '>';
   }
-}
+};
 
 Object.extend(Enumerable, {
   map:     Enumerable.collect,
@@ -644,7 +644,7 @@ var $A = Array.from = function(iterable) {
       results.push(iterable[i]);
     return results;
   }
-}
+};
 
 if (Prototype.Browser.WebKit) {
   $A = Array.from = function(iterable) {
@@ -811,7 +811,7 @@ Hash.toQueryString.addPair = function(key, value, prefix) {
   key = encodeURIComponent(key);
   if (value === undefined) this.push(key);
   else this.push(key + '=' + (value == null ? '' : encodeURIComponent(value)));
-}
+};
 
 Object.extend(Hash.prototype, Enumerable);
 Object.extend(Hash.prototype, {
@@ -876,8 +876,7 @@ Object.extend(Hash.prototype, {
 function $H(object) {
   if (object instanceof Hash) return object;
   return new Hash(object);
-};
-
+}
 // Safari iterates over shadowed properties
 if (function() {
   var i = 0, Test = function(value) { this.key = value };
@@ -924,7 +923,7 @@ Object.extend(ObjectRange.prototype, {
 
 var $R = function(start, end, exclusive) {
   return new ObjectRange(start, end, exclusive);
-}
+};
 
 var Ajax = {
   getTransport: function() {
@@ -936,7 +935,7 @@ var Ajax = {
   },
 
   activeRequestCount: 0
-}
+};
 
 Ajax.Responders = {
   responders: [],
@@ -985,14 +984,14 @@ Ajax.Base.prototype = {
       contentType:  'application/x-www-form-urlencoded',
       encoding:     'UTF-8',
       parameters:   ''
-    }
+    };
     Object.extend(this.options, options || {});
 
     this.options.method = this.options.method.toLowerCase();
     if (typeof this.options.parameters == 'string')
       this.options.parameters = this.options.parameters.toQueryParams();
   }
-}
+};
 
 Ajax.Request = Class.create();
 Ajax.Request.Events =
@@ -1167,7 +1166,7 @@ Object.extend(Object.extend(Ajax.Updater.prototype, Ajax.Request.prototype), {
     this.container = {
       success: (container.success || container),
       failure: (container.failure || (container.success ? null : container))
-    }
+    };
 
     this.transport = Ajax.getTransport();
     this.setOptions(options);
@@ -1585,7 +1584,7 @@ Element.Methods = {
     var elementStyle = element.style;
 
     for (var property in styles)
-      if (property == 'opacity') element.setOpacity(styles[property])
+      if (property == 'opacity') element.setOpacity(styles[property]);
       else
         elementStyle[(property == 'float' || property == 'cssFloat') ?
           (elementStyle.styleFloat === undefined ? 'cssFloat' : 'styleFloat') :
@@ -1919,7 +1918,7 @@ var Toggle = { display: Element.toggle };
 
 Abstract.Insertion = function(adjacency) {
   this.adjacency = adjacency;
-}
+};
 
 Abstract.Insertion.prototype = {
   initialize: function(element, content) {
@@ -1951,9 +1950,9 @@ Abstract.Insertion.prototype = {
     div.innerHTML = '<table><tbody>' + this.content + '</tbody></table>';
     return $A(div.childNodes[0].childNodes[0].childNodes);
   }
-}
+};
 
-var Insertion = new Object();
+var Insertion = {};
 
 Insertion.Before = Class.create();
 Insertion.Before.prototype = Object.extend(new Abstract.Insertion('beforeBegin'), {
@@ -2713,7 +2712,7 @@ Form.Methods = {
 
     return new Ajax.Request(form.readAttribute('action'), options);
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -2727,7 +2726,7 @@ Form.Element = {
     $(element).select();
     return element;
   }
-}
+};
 
 Form.Element.Methods = {
   serialize: function(element) {
@@ -2781,7 +2780,7 @@ Form.Element.Methods = {
     element.disabled = false;
     return element;
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -2834,11 +2833,11 @@ Form.Element.Serializers = {
     // extend element because hasAttribute may not be native
     return Element.extend(opt).hasAttribute('value') ? opt.value : opt.text;
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
-Abstract.TimedObserver = function() {}
+Abstract.TimedObserver = function() {};
 Abstract.TimedObserver.prototype = {
   initialize: function(element, frequency, callback) {
     this.frequency = frequency;
@@ -2862,7 +2861,7 @@ Abstract.TimedObserver.prototype = {
       this.lastValue = value;
     }
   }
-}
+};
 
 Form.Element.Observer = Class.create();
 Form.Element.Observer.prototype = Object.extend(new Abstract.TimedObserver(), {
@@ -2880,7 +2879,7 @@ Form.Observer.prototype = Object.extend(new Abstract.TimedObserver(), {
 
 /*--------------------------------------------------------------------------*/
 
-Abstract.EventObserver = function() {}
+Abstract.EventObserver = function() {};
 Abstract.EventObserver.prototype = {
   initialize: function(element, callback) {
     this.element  = $(element);
@@ -2918,7 +2917,7 @@ Abstract.EventObserver.prototype = {
       }
     }
   }
-}
+};
 
 Form.Element.EventObserver = Class.create();
 Form.Element.EventObserver.prototype = Object.extend(new Abstract.EventObserver(), {
@@ -2934,7 +2933,7 @@ Form.EventObserver.prototype = Object.extend(new Abstract.EventObserver(), {
   }
 });
 if (!window.Event) {
-  var Event = new Object();
+  var Event = {};
 }
 
 Object.extend(Event, {
@@ -3181,7 +3180,7 @@ var Position = {
       setHeight:  true,
       offsetTop:  0,
       offsetLeft: 0
-    }, arguments[2] || {})
+    }, arguments[2] || {});
 
     // find page position of source
     source = $(source);
@@ -3248,7 +3247,7 @@ var Position = {
     element.style.height = element._originalHeight;
     element.style.width  = element._originalWidth;
   }
-}
+};
 
 // Safari returns margins on body which is incorrect if the child is absolutely
 // positioned.  For performance reasons, redefine Position.cumulativeOffset for

@@ -16,8 +16,7 @@ describe('Function', function() {
                 this.push(a);
             }, this);
             return this;
-        };
-        
+        }
         beforeEach(function() {
             actual = [];
             testSubject.a = [];
@@ -136,7 +135,7 @@ describe('Function', function() {
         it('returns the value that instance of original "class" when called as a constructor', function() {
             var classA = function(x) {
                 this.name = x || "A";
-            }
+            };
             var classB = classA.bind(null, "B");
             
             var result = new classB;

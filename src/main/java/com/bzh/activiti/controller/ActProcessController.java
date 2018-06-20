@@ -142,8 +142,8 @@ public class ActProcessController {
 		if(null==exportDir||"".equals(exportDir)){
 			exportDir="";//actProperties.getDiagramExportPath();
 		}
-		List<String> files = actProcessService.exportDiagrams(exportDir);;
-		return files;
+		List<String> files = actProcessService.exportDiagrams(exportDir);
+        return files;
 	}
 
 	/**

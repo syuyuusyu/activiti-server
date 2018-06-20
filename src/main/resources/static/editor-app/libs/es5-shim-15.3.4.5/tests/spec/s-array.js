@@ -11,8 +11,7 @@ describe('Array', function() {
         });
         o.length = arr.length;
         return o;
-    };
-
+    }
     describe('forEach', function() {
         "use strict";
         var expected, actual;
@@ -792,7 +791,7 @@ describe('Array', function() {
                     i++;
                     if(i <= 4) {
                         arr.push(a+3);
-                    };
+                    }
                     return b;
                 });
                 expect(arr).toEqual([1,2,3,4,5]);
@@ -861,7 +860,7 @@ describe('Array', function() {
                     i++;
                     if(i <= 4) {
                         arr[i+2] = a+3;
-                    };
+                    }
                     return b;
                 });
                 expect(arr).toEqual({
@@ -940,7 +939,7 @@ describe('Array', function() {
                     i++;
                     if(i <= 4) {
                         arr.push(a+3);
-                    };
+                    }
                     return b;
                 });
                 expect(arr).toEqual([1,2,3,6,5]);
@@ -1017,7 +1016,7 @@ describe('Array', function() {
                     i++;
                     if(i <= 4) {
                         arr[i+2] = a+3;
-                    };
+                    }
                     return b;
                 });
                 expect(arr).toEqual({

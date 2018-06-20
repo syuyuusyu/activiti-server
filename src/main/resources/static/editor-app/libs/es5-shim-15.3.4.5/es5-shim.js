@@ -813,8 +813,7 @@ if (!Date.parse || "Date.parse is buggy") {
                 return date;
             }
             return NativeDate.apply(this, arguments);
-        };
-
+        }
         // 15.9.1.15 Date Time String Format.
         var isoDateExpression = new RegExp("^" +
             "(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign +

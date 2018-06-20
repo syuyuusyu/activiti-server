@@ -14,7 +14,7 @@ beforeEach(function() {
                     }
                 }
                 return a;
-            }
+            };
             a1 = getKeys(actual);
             a2 = getKeys(expected);
             

@@ -69,7 +69,7 @@ EDITOR.UTIL = {
 
         visitedElementsArray.push(element.id);
 
-        var property = element.properties[propertyType]
+        var property = element.properties[propertyType];
         if (property) {
             collectedProperties.push(property);
         }

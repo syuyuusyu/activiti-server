@@ -104,6 +104,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>ind.syu</groupId>
             <artifactId>restFul</artifactId>
             <version>1.0</version>

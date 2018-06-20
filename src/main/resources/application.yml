@@ -115,5 +115,7 @@ selfProperties:
   ispIp: http://127.0.0.1:7001
   activitiIp: http://127.0.0.1:5002
   localIp: http://localhost
+  rabbitmqUrl: amqp://guest:guest@127.0.0.1:5672
+  queueName: activitiQueue
 
 

@@ -42,7 +42,7 @@ ORYX.Utils = {
 			});
 		}
 	}
-}
+};
 /*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
  * License rights for this program may be obtained from Alfresco Software, Ltd.
@@ -125,7 +125,7 @@ var Kickstart = {
 
 		return true;
 	}
-}
+};
 
 // register kickstart as the new onload event listener on current window.
 // previous listener(s) are triggered to launch with kickstart.
@@ -698,13 +698,13 @@ var DataManager = {
 			]);
 			
 		} else {
-			var resource = $(shape.resourceId)
-			var children = $A(resource.childNodes)
+			var resource = $(shape.resourceId);
+			var children = $A(resource.childNodes);
 			children.each( function(child) {
 				resource.removeChild(child);
 			});
-		};
-	},
+        }
+    },
 	
 	__persistShape: function(shape) {
 
@@ -933,7 +933,7 @@ var DataManager = {
 			
 			var children = $A(node.childNodes);
 			var attributes = $A(node.attributes);
-			var clazz = new String(node.getAttribute('class'));
+			var clazz = String(node.getAttribute('class'));
 			var ignore = clazz.split(' ').member('transient');
 
 			// ignore transients.
@@ -988,7 +988,7 @@ var DataManager = {
 		
 		if(!triple.subject.type == ERDF.LITERAL)
 			throw 'Cannot add the triple ' + triple.toString() +
-				' because the subject is not a resource.'
+				' because the subject is not a resource.';
 		
 		// get the element which represents this triple's subject.
 		var elementId = ERDF.__stripHashes(triple.subject.value);
@@ -1081,7 +1081,7 @@ var DataManager = {
 		if(continueFrom.nodeType != continueFrom.ELEMENT_NODE)
 			return false;
 		
-		var classes = new String(continueFrom.getAttribute('class'));
+		var classes = String(continueFrom.getAttribute('class'));
 		var children = $A(continueFrom.childNodes);
 		
 		if(classes.include(triple.predicate.prefix + '-' + triple.predicate.name)) {
@@ -1216,12 +1216,13 @@ var DataManager = {
 			return select;
 		});
 	}
-}
+};
 
 Kickstart.register(DataManager.init);
 
-function assert(expr, m) { if(!expr) throw m; };
-
+function assert(expr, m) {
+    if (!expr) throw m;
+}
 function DMCommand(action, triple) {
 	
 	// store action and triple.
@@ -1267,7 +1268,7 @@ function DMCommandHandler(nextHandler) {
 	 */
 	this.handle = function(command) {
 		return this.process(command) ? true : this.__invokeNext(command);
-	}
+	};
 	
 	/**
 	 * Empty process() method returning false. If javascript knew abstract
@@ -1275,8 +1276,7 @@ function DMCommandHandler(nextHandler) {
 	 * @param {Object} command The command object to process.
 	 */
 	this.process = function(command) { return false; };
-};
-
+}
 /**
  * This Handler manages the addition and the removal of meta elements in the
  * head of the document.
@@ -1298,8 +1298,7 @@ function MetaTagHandler(next) {
 		}
 		
 	};
-};
-
+}
 var chain =	new MetaTagHandler();
 var command = new DMCommand(TRIPLE_ADD, new ERDF.Triple(
 	new ERDF.Resource(''),
@@ -1495,12 +1494,12 @@ ResourceManager = {
 		// convenience finction for getting the id.
 		this.id = function() {
 			return this.__id;
-		}
+		};
 
 		// convenience finction for getting the entry url.
 		this.url = function() {
 			return this.__url;
-		}
+		};
 		
 		this.reload = function() {
 			var _url = this.__url;
@@ -1594,7 +1593,7 @@ ResourceManager = {
 			httpRequest.onerror = error;
 		}
 		
-		var h = $H(headers)
+		var h = $H(headers);
 		h.keys().each(function(key) {
 			
 			httpRequest.setRequestHeader(key, h[key]);
@@ -1668,7 +1667,7 @@ ResourceManager = {
 				var id = div.getAttribute('id');
 				
 				// remove the local resource representation from DOM
-				var localDiv = document.getElementById(id)
+				var localDiv = document.getElementById(id);
 				localDiv.parentNode.removeChild(localDiv);
 				
 				// store div in DOM
@@ -1698,7 +1697,7 @@ ResourceManager = {
 			"wrong with either the server, the transport protocol or your " +
 			"online status. Sure you're online?";
 	}
-}/*
+};/*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
  * License rights for this program may be obtained from Alfresco Software, Ltd.
  * pursuant to a written agreement and any use of this program without such an
@@ -2253,7 +2252,7 @@ ORYX = Object.extend(ORYX, {
 		
 		// load plugins if enabled.
 		if(ORYX.CONFIG.PLUGINS_ENABLED)
-			ORYX._loadPlugins()
+			ORYX._loadPlugins();
 		else
 			ORYX.Log.warn("Ignoring plugins, loading Core only.");
 
@@ -2296,10 +2295,13 @@ ORYX = Object.extend(ORYX, {
 						var property = new Hash(); 
 						
 						// get all attributes from the node and set to global properties
-						var attributes = $A(prop.attributes)
-						attributes.each(function(attr){property[attr.nodeName] = attr.nodeValue});				
-						if(attributes.length > 0) { globalProperties.push(property) };				
-					});
+						var attributes = $A(prop.attributes);
+						attributes.each(function(attr){property[attr.nodeName] = attr.nodeValue});
+
+if (attributes.length > 0) {
+                            globalProperties.push(property)
+                        }
+                    });
 				});
 
 				
@@ -2333,11 +2335,13 @@ ORYX = Object.extend(ORYX, {
 						var property = new Hash(); 
 						
 						// Get all Attributes from the Node			
-						var attributes = $A(prop.attributes)
-						attributes.each(function(attr){property[attr.nodeName] = attr.nodeValue});				
-						if(attributes.length > 0) { properties.push(property) };	
-					
-					});
+						var attributes = $A(prop.attributes);
+						attributes.each(function(attr){property[attr.nodeName] = attr.nodeValue});
+
+if (attributes.length > 0) {
+                            properties.push(property)
+                        }
+                    });
 					
 					// Set all Global-Properties to the Properties
 					properties = properties.concat(globalProperties);
@@ -2349,7 +2353,7 @@ ORYX = Object.extend(ORYX, {
 					var requireNodes = node.getElementsByTagName("requires");
 					var requires;
 					$A(requireNodes).each(function(req) {			
-						var namespace = $A(req.attributes).find(function(attr){ return attr.name == "namespace"})
+						var namespace = $A(req.attributes).find(function(attr){ return attr.name == "namespace"});
 						if( namespace && namespace.nodeValue ){
 							if( !requires ){
 								requires = {namespaces:[]}
@@ -2369,7 +2373,7 @@ ORYX = Object.extend(ORYX, {
 					var notUsesInNodes = node.getElementsByTagName("notUsesIn");
 					var notUsesIn;
 					$A(notUsesInNodes).each(function(not) {			
-						var namespace = $A(not.attributes).find(function(attr){ return attr.name == "namespace"})
+						var namespace = $A(not.attributes).find(function(attr){ return attr.name == "namespace"});
 						if( namespace && namespace.nodeValue ){
 							if( !notUsesIn ){
 								notUsesIn = {namespaces:[]}
@@ -3065,7 +3069,7 @@ ORYX.Core.SVG.MinMaxPathHandler = Clazz.extend({
 	 * closePath - z or Z
 	 */
 	closePath: function() {
-	    return;// do nothing
+	    // do nothing
 	}
 
 });/*
@@ -3341,7 +3345,7 @@ ORYX.Core.SVG.PointsPathHandler = Clazz.extend({
 	 * closePath - z or Z
 	 */
 	closePath: function() {
-	    return;// do nothing
+	    // do nothing
 	}
 
 });/*
@@ -3752,7 +3756,7 @@ ORYX.Core.SVG.SVGShape = Clazz.extend({
 			var pointsArray = [];
 			if (this.element.points&&this.element.points.numberOfItems){
 			    for(var i=0, size=this.element.points.numberOfItems; i<size; i++){
-			        pointsArray.push(this.element.points.getItem(i).x)
+			        pointsArray.push(this.element.points.getItem(i).x);
 			        pointsArray.push(this.element.points.getItem(i).y)
 			    }
 			} else {
@@ -4920,7 +4924,7 @@ ORYX.Core.SVG.Label = Clazz.extend({
 	text: function() {
 		switch (arguments.length) {
 			case 0:
-				return this._text
+				return this._text;
 				break;
 			
 			case 1:
@@ -5061,7 +5065,7 @@ ORYX.Core.SVG.Label = Clazz.extend({
 		
 		if (!fontSize) {
 			//because this only works in firefox 3, all other browser use the default line height
-			if (tspans[0] && /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent) && new Number(RegExp.$1) >= 3) {
+			if (tspans[0] && /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent) && Number(RegExp.$1) >= 3) {
 				fontSize = tspans[0].getExtentOfChar(0).height;
 			}
 			else {
@@ -5246,7 +5250,7 @@ ORYX.Core.Math.midPoint = function(point1, point2) {
 				x: (point1.x + point2.x) / 2.0,
 				y: (point1.y + point2.y) / 2.0
 			}
-}
+};
 			
 /**
  * Returns a TRUE if the point is over a line (defined by
@@ -5287,7 +5291,7 @@ ORYX.Core.Math.isPointInLine = function (pointX, pointY, lPoint1X, lPoint1Y, lPo
 	var s = (lPoint1Y - lPoint2Y) / (lPoint1X - lPoint2X);
 	
 	return 	Math.abs(pointY - ((s * pointX) + lPoint1Y - s * lPoint1X)) < offset
-}
+};
 
 /**
  * Get a boolean if the point is in the polygone
@@ -5303,7 +5307,7 @@ ORYX.Core.Math.isPointInEllipse = function (pointX, pointY, cx, cy, rx, ry) {
     var ty = (pointY - cy) / ry;
 	
     return tx * tx + ty * ty < 1.0;
-}
+};
 	
 /**
  * Get a boolean if the point is in the polygone
@@ -5344,7 +5348,7 @@ ORYX.Core.Math.isPointInPolygone = function(pointX, pointY, polygone){
         }
     }
 	return (crossings%2)?true:false;
-}
+};
 
 /**
  *	Calculates the distance between a point and a line. It is also testable, if 
@@ -5451,7 +5455,7 @@ ORYX.Core.Math.getVector = function(point1, point2){
 		x: point2.x - point1.x,
 		y: point2.y - point1.y
 	}
-}
+};
 
 /**
  * Returns the an identity vector of the given vector, 
@@ -5468,12 +5472,12 @@ ORYX.Core.Math.getIdentityVector = function(vector){
 		vector = ORYX.Core.Math.getVector(arguments[0], arguments[1]);
 	}
 	
-	var length = Math.sqrt((vector.x*vector.x)+(vector.y*vector.y))
+	var length = Math.sqrt((vector.x*vector.x)+(vector.y*vector.y));
 	return {
 		x: vector.x / (length || 1),
 		y: vector.y / (length || 1)
 	}
-}
+};
 
 
 ORYX.Core.Math.getOrthogonalIdentityVector = function(point1, point2){
@@ -5482,7 +5486,7 @@ ORYX.Core.Math.getOrthogonalIdentityVector = function(point1, point2){
 		x: vec.y,
 		y: -vec.x
 	}
-}
+};
 
 
 /**
@@ -5524,7 +5528,7 @@ ORYX.Core.Math.getPointOfIntersectionPointLine = function(
 		}
 	}
 	
-	pointOfIntersection = new Object();
+	pointOfIntersection = {};
 	pointOfIntersection.x = lineP1.x + u * (lineP2.x - lineP1.x);
 	pointOfIntersection.y = lineP1.y + u * (lineP2.y - lineP1.y);	
 	
@@ -5541,7 +5545,7 @@ ORYX.Core.Math.getTranslatedPoint = function(point, matrix){
 	var x = matrix.a*point.x+matrix.c*point.y+matrix.e*1;
 	var y = matrix.b*point.x+matrix.d*point.y+matrix.f*1;
     return {x:x, y:y}
-}
+};
 
 
 /**
@@ -5565,7 +5569,7 @@ ORYX.Core.Math.getInverseMatrix = function(matrix){
 		e: det * ((m.c*m.f)-(m.e*m.d)),
 		f: det * ((m.e*m.b)-(m.a*m.f))
 	}
-}
+};
 
 /**
  * Returns the determinant of the svg transformation matrix
@@ -5576,7 +5580,7 @@ ORYX.Core.Math.getInverseMatrix = function(matrix){
 ORYX.Core.Math.getDeterminant = function(m){
 	// a11a22a33+a12a23a31+a13a21a32-a13a22a31-a12a21a33-a11a23a32
 	return (m.a*m.d*1)+(m.c*m.f*0)+(m.e*m.b*0)-(m.e*m.d*0)-(m.c*m.b*1)-(m.a*m.f*0);
-}
+};
 
 /**
  * Returns the bounding box of the given node. Translates the 
@@ -5595,11 +5599,11 @@ ORYX.Core.Math.getTranslatedBoundingBox = function(node){
 	var minPoint = {
 	    x: Math.min(ul.x, ll.x, ur.x, lr.x),
 	    y: Math.min(ul.y, ll.y, ur.y, lr.y)
-	}
+	};
 	var maxPoint = {
 	    x: Math.max(ul.x, ll.x, ur.x, lr.x),
 	    y: Math.max(ul.y, ll.y, ur.y, lr.y)
-	}
+	};
 	return {
 	    x: minPoint.x,
 	    y: minPoint.y,
@@ -5667,7 +5671,7 @@ new function(){
 	 */
 	ORYX.Core.Math.isRectOverLine = function(x1, y1, x2, y2, xmin, ymin, xmax, ymax){
 		return !!ORYX.Core.Math.clipLineOnRect.apply(ORYX.Core.Math, arguments);
-	}
+	};
 	
 	/**
 	 * Returns the clipped line on the given rectangle. If there is 
@@ -5821,8 +5825,10 @@ ORYX.Core.StencilSet.Stencil = {
 			throw "ORYX.Core.StencilSet.Stencil(construct): Title is not defined.";
 		}
 
-		if(!this._jsonStencil.description) { this._jsonStencil.description = ""; };
-		if(!this._jsonStencil.groups) { this._jsonStencil.groups = []; }
+if (!this._jsonStencil.description) {
+            this._jsonStencil.description = "";
+        }
+        if(!this._jsonStencil.groups) { this._jsonStencil.groups = []; }
 		if(!this._jsonStencil.roles) { this._jsonStencil.roles = []; }
 		
 		//add id of stencil to its roles
@@ -6127,7 +6133,7 @@ function _evilSafariHack(serializedXML) {
 	// your standard AJAX stuff
 	var req = new XMLHttpRequest();
 	req.open("GET", url);
-	req.onload = function() { dom = req.responseXML; }
+	req.onload = function() { dom = req.responseXML; };
 	req.send(null);
 	
 	return dom;
@@ -6901,7 +6907,7 @@ ORYX.Core.StencilSet.Rules = {
 			stencilsets.each(function(ss){
 				this.initializeRules(ss);
 			}.bind(this));
-			return;
+
 		}
 		else {
 			this._stencilSets.push(stencilSet);
@@ -7087,7 +7093,7 @@ ORYX.Core.StencilSet.Rules = {
 							"b": o["b"]||1,
 							"l": o["l"]||1
 						}
-				}
+				};
 				
 				jsonRules.layoutRules.each(function(rules){
 					var layoutKey;
@@ -7170,7 +7176,7 @@ ORYX.Core.StencilSet.Rules = {
 	_cacheCard: function(args) {
 			
 		if(args.sourceStencil) {
-			var source = this._cachedCardSE[args.sourceStencil.id()]
+			var source = this._cachedCardSE[args.sourceStencil.id()];
 			
 			if(!source) {
 				source = new Hash();
@@ -7185,7 +7191,7 @@ ORYX.Core.StencilSet.Rules = {
 		}	
 		
 		if(args.targetStencil) {
-			var target = this._cachedCardTE[args.targetStencil.id()]
+			var target = this._cachedCardTE[args.targetStencil.id()];
 			
 			if(!target) {
 				target = new Hash();
@@ -7203,7 +7209,7 @@ ORYX.Core.StencilSet.Rules = {
 	_cacheContain: function(args) {
 		
 		var result = [this._canContain(args), 
-					  this._getMaximumOccurrence(args.containingStencil, args.containedStencil)]
+					  this._getMaximumOccurrence(args.containingStencil, args.containedStencil)];
 		
 		if(result[1] == undefined) 
 			result[1] = -1;
@@ -7782,7 +7788,7 @@ ORYX.Core.StencilSet.Rules = {
 
 		var baseMorphs = this.baseMorphs();
 		// BaseMorphs should be in the front of the array
-		_morphStencils = _morphStencils.uniq().sort(function(a,b){ return baseMorphs.include(a)&&!baseMorphs.include(b) ? -1 : (baseMorphs.include(b)&&!baseMorphs.include(a) ? 1 : 0)})
+		_morphStencils = _morphStencils.uniq().sort(function(a,b){ return baseMorphs.include(a)&&!baseMorphs.include(b) ? -1 : (baseMorphs.include(b)&&!baseMorphs.include(a) ? 1 : 0)});
 		return _morphStencils;
 	},
 	
@@ -7914,7 +7920,7 @@ ORYX.Core.StencilSet.Rules = {
 					layout[v][d]=Math.max(edgeRule?edgeRule[d]:defaultRule[d],layout[v][d]||0);
 				}.bind(this));
 			}
-		}.bind(this)
+		}.bind(this);
 		
 		// For each role
 		shape.getStencil().roles().each(function(role) {
@@ -7932,7 +7938,7 @@ ORYX.Core.StencilSet.Rules = {
 			["t","r","b","l"].each(function(d){
 					layout[v][d]=layout[v][d]!==undefined?layout[v][d]:1;
 				});
-		})
+		});
 		
 		return layout;
 	},
@@ -8125,7 +8131,7 @@ ORYX.Core.StencilSet.Rules = {
 	},
 
 	toString: function() { return "Rules"; }
-}
+};
 ORYX.Core.StencilSet.Rules = Clazz.extend(ORYX.Core.StencilSet.Rules);
 /*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
@@ -8616,7 +8622,7 @@ ORYX.Core.StencilSet.stencilSets = function(editorId) {
 	var stencilSets = new Hash();
 	if(stencilSetNSs) {
 		stencilSetNSs.each(function(stencilSetNS) {
-			var stencilSet = ORYX.Core.StencilSet.stencilSet(stencilSetNS)
+			var stencilSet = ORYX.Core.StencilSet.stencilSet(stencilSetNS);
 			stencilSets[stencilSet.namespace()] = stencilSet;
 		});
 	}
@@ -9010,9 +9016,8 @@ ORYX.Core.Bounds = {
 		if( (this.a.x === undefined) && (this.a.y === undefined) &&
 			(this.b.x === undefined) && (this.b.y === undefined)) {
 			return b;
-		};
-		
-		var cx = Math.min(this.a.x,b.a.x);
+        }
+        var cx = Math.min(this.a.x,b.a.x);
 		var cy = Math.min(this.a.y,b.a.y);
 		
 		var dx = Math.max(this.b.x,b.b.x);
@@ -9535,7 +9540,7 @@ ORYX.Core.AbstractShape = ORYX.Core.UIObject.extend(
 		this._stencil = stencil;
 		// if the stencil defines a super stencil that should be used for its instances, set it.
 		if (this._stencil._jsonStencil.superId){
-			stencilId = this._stencil.id()
+			stencilId = this._stencil.id();
 			superStencilId = stencilId.substring(0, stencilId.indexOf("#") + 1) + stencil._jsonStencil.superId;
 			stencilSet =  this._stencil.stencilSet();
 			this._stencil = stencilSet.stencil(superStencilId);
@@ -9864,9 +9869,10 @@ ORYX.Core.AbstractShape = ORYX.Core.UIObject.extend(
 			switch(prefix + "-" + name){
 				case 'raziel-parent': 
 							// Set parent
-							if(!this.parent) {break};
-							
-							// Set outgoing Shape
+                    if (!this.parent) {
+                        break
+                    }
+                    // Set outgoing Shape
 							var parent = this.getCanvas().getChildShapeByResourceId(value);
 							if(parent) {
 								parent.add(this);
@@ -10030,7 +10036,7 @@ ORYX.Core.AbstractShape.JSONHelper = {
      serialize: function(){
          return JSON.stringify(this);
      }
- }
+ };
 /*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
  * License rights for this program may be obtained from Alfresco Software, Ltd.
@@ -10579,7 +10585,7 @@ ORYX.Core.Canvas = ORYX.Core.AbstractShape.extend({
         var offset      = 100;
         this.getChildShapes(true, function(shape){
             var b = shape.bounds;
-            maxWidth    = Math.max( maxWidth, b.lowerRight().x + offset)
+            maxWidth    = Math.max( maxWidth, b.lowerRight().x + offset);
             maxHeight   = Math.max( maxHeight, b.lowerRight().y + offset)
         }); 
         
@@ -10627,9 +10633,10 @@ ORYX.Core.Canvas = ORYX.Core.AbstractShape.extend({
 	},
 
 	setSize: function(size, dontSetBounds) {
-		if(!size || !size.width || !size.height){return;};
-		
-		if(this.rootNode.parentNode){
+        if (!size || !size.width || !size.height) {
+            return;
+        }
+        if(this.rootNode.parentNode){
 			this.rootNode.parentNode.style.width = size.width + 'px';
 			this.rootNode.parentNode.style.height = size.height + 'px';
 		}
@@ -10929,7 +10936,7 @@ ORYX.Editor = {
 		var initFinished = function(){	
 			if( !loadPluginFinished || !loadContentFinished ){ return }
 			this._finishedLoading();
-		}.bind(this)
+		}.bind(this);
 		
 		// LOAD the plugins
 		window.setTimeout(function(){
@@ -11010,7 +11017,7 @@ ORYX.Editor = {
 	},
 
 	loadScript: function (url, callback){
-	    var script = document.createElement("script")
+	    var script = document.createElement("script");
 	    script.type = "text/javascript";
 	    if (script.readyState){  //IE
 	        script.onreadystatechange = function(){
@@ -11121,7 +11128,7 @@ ORYX.Editor = {
 			// Get the plugins from the available plugins (those who are in the plugins.xml)
 			ORYX.availablePlugins = $A(ORYX.availablePlugins).findAll(function(value){
 										return ORYX.MashupAPI.loadablePlugins.include( value.name )
-									})
+									});
 			
 			// Add those plugins to the list, which are only in the loadablePlugins list
 			ORYX.MashupAPI.loadablePlugins.each(function( className ){
@@ -11449,7 +11456,7 @@ ORYX.Editor = {
 					
 					this.facade.setSelection(selection);
 				}
-			})
+			});
 			
 			var command = new commandClass(jsonObject, 
 											this.loadSerialized.bind(this),
@@ -11492,7 +11499,7 @@ ORYX.Editor = {
             return shapes.map(function(shape){
                 return collectResourceIds(shape.childShapes).concat(shape.resourceId);
             }).flatten();
-        }
+        };
         var resourceIds = collectResourceIds(jsonObject.childShapes);
         
         // Replace each resource id by a new one
@@ -11903,7 +11910,7 @@ ORYX.Editor = {
 			// And both endings dockers will be referenced to the both shapes
 			con.dockers.first().setDockedShape(option.connectedShape);
 			
-			var magnet = option.connectedShape.getDefaultMagnet()
+			var magnet = option.connectedShape.getDefaultMagnet();
 			var cPoint = magnet ? magnet.bounds.center() : option.connectedShape.bounds.midPoint();
 			con.dockers.first().setReferencePoint( cPoint );
 			con.dockers.last().setDockedShape(newShapeObject);
@@ -11943,7 +11950,7 @@ ORYX.Editor = {
 
 		} else {
 			
-			var b = newShapeObject.bounds
+			var b = newShapeObject.bounds;
 			if( newShapeObject instanceof ORYX.Core.Node && newShapeObject.dockers.length == 1){
 				b = newShapeObject.dockers.first().bounds
 			}
@@ -11951,7 +11958,7 @@ ORYX.Editor = {
 			b.centerMoveTo(point);
 			
 			var upL = b.upperLeft();
-			b.moveBy( -Math.min(upL.x, 0) , -Math.min(upL.y, 0) )
+			b.moveBy( -Math.min(upL.x, 0) , -Math.min(upL.y, 0) );
 			
 			var lwR = b.lowerRight();
 			b.moveBy( -Math.max(lwR.x-canvas.bounds.width(), 0) , -Math.max(lwR.y-canvas.bounds.height(), 0) )
@@ -12202,7 +12209,7 @@ ORYX.Editor = {
 		// get canvas.
 		var canvas = this.getCanvas();
 		// Try to get the focus
-		canvas.focus()
+		canvas.focus();
 	
 		// find the shape that is responsible for this element's id.
 		var element = event.currentTarget;
@@ -12244,8 +12251,8 @@ ORYX.Editor = {
 			&& !currentIsSelected) {
 				
 			var newSelection = this.selection.clone();
-			newSelection.push(elementController)
-			this.setSelection(newSelection)
+			newSelection.push(elementController);
+			this.setSelection(newSelection);
 
 			ORYX.Log.trace("Rule #4 applied for mouse down on %0", element.id);
 
@@ -12254,7 +12261,7 @@ ORYX.Editor = {
 			modifierKeyPressed) {
 
 			var newSelection = this.selection.clone();
-			this.setSelection(newSelection.without(elementController))
+			this.setSelection(newSelection.without(elementController));
 
 			ORYX.Log.trace("Rule #6 applied for mouse down on %0", elementController.id);
 
@@ -12302,11 +12309,11 @@ ORYX.Editor = {
 		
 		// prevent event from bubbling, return.
 		//Event.stop(event);
-		return;
+
 	},
 
 	_handleMouseMove: function(event, uiObj) {
-		return;
+
 	},
 
 	_handleMouseUp: function(event, uiObj) {
@@ -12323,11 +12330,11 @@ ORYX.Editor = {
 	},
 
 	_handleMouseHover: function(event, uiObj) {
-		return;
+
 	},
 
 	_handleMouseOut: function(event, uiObj) {
-		return;
+
 	},
 
 	/**
@@ -12408,7 +12415,7 @@ ORYX.Editor.createByUrl = function(modelUrl){
         new ORYX.Editor(editorConfig);
       }.bind(this)
     });
-}
+};
 
 // TODO Implement namespace awareness on attribute level.
 /**
@@ -12589,7 +12596,7 @@ ORYX.Editor.setMissingClasses = function() {
 		
 	}
 	
-}
+};
 ORYX.Editor.checkClassType = function( classInst, classType ) {
 	
 	if( ORYX.Editor.SVGClassElementsAreAvailable ){
@@ -12648,7 +12655,7 @@ new function(){
 	
 		var position = {
 			x: Event.pointerX(event) - this.offSetPosition.x,
-			y: Event.pointerY(event) - this.offSetPosition.y}
+			y: Event.pointerY(event) - this.offSetPosition.y};
 	
 		position.x 	-= this.offsetScroll.x - this.scrollNode.scrollLeft; 
 		position.y 	-= this.offsetScroll.y - this.scrollNode.scrollTop;
@@ -12982,7 +12989,7 @@ ORYX.Core.Shape = {
 									if (label) {
 										try {
 									    	propJson = prop.evalJSON();
-									    	var value = propJson[property.complexAttributeToView()]
+									    	var value = propJson[property.complexAttributeToView()];
 									    	label.text(value ? value : prop);
 									    } catch (e) {
 									    	label.text(prop);
@@ -12993,7 +13000,7 @@ ORYX.Core.Shape = {
 									switch (property.type()) {
 										case ORYX.CONFIG.TYPE_BOOLEAN:	
 										    if (typeof prop == "string")
-												prop = prop === "true"
+												prop = prop === "true";
 		
 											svgElem.setAttributeNS(null, 'display', (!(prop === property.inverseBoolean())) ? 'inherit' : 'none');
 											
@@ -13118,7 +13125,7 @@ ORYX.Core.Shape = {
 	
 	layout: function() {
 		//this.getStencil().layout(this)
-		var layoutEvents = this.getStencil().layout()
+		var layoutEvents = this.getStencil().layout();
 		if (layoutEvents) {
 			layoutEvents.each(function(event) {
 				
@@ -13179,7 +13186,7 @@ ORYX.Core.Shape = {
 				
 		if (value !== 1.0){
 			value = String(value);
-			this.node.setAttributeNS(null, "fill-opacity", value)
+			this.node.setAttributeNS(null, "fill-opacity", value);
 			this.node.setAttributeNS(null, "stroke-opacity", value)
 		} else {
 			this.node.removeAttributeNS(null, "fill-opacity");
@@ -13489,10 +13496,10 @@ ORYX.Core.Shape = {
 			}			
 			
 			// Calc the length of the line
-			var length = Math.sqrt(Math.pow(includePointX - excludePointX, 2) + Math.pow(includePointY - excludePointY, 2))
+			var length = Math.sqrt(Math.pow(includePointX - excludePointX, 2) + Math.pow(includePointY - excludePointY, 2));
 			// Calc a point one step from the include point
 			refPointX = includePointX + ((excludePointX - includePointX) / length),
-			refPointY = includePointY + ((excludePointY - includePointY) / length)
+			refPointY = includePointY + ((excludePointY - includePointY) / length);
 					
 			
 			// If the reference point not in the bounds, break
@@ -13803,7 +13810,7 @@ ORYX.Core.Controls.Docker = ORYX.Core.Controls.Control.extend({
 			}
 			
 			// Get the first and the last Docker of the parent Shape
-			var dockerIndex = this.parent.dockers.indexOf(this)
+			var dockerIndex = this.parent.dockers.indexOf(this);
 			var dock1 = this;
 			var dock2 = this.parent.dockers.length > 1 ? 
 							(dockerIndex === 0?							// If there is the first element
@@ -13857,7 +13864,7 @@ ORYX.Core.Controls.Docker = ORYX.Core.Controls.Control.extend({
 				}
 				
 				// Set the bounds to the new point
-				this.bounds.centerMoveTo(newPoint)
+				this.bounds.centerMoveTo(newPoint);
 			
 				this._oldRefPoint1 = absoluteReferenzPoint1;
 				this._oldRefPoint2 = absoluteReferenzPoint2;
@@ -13887,7 +13894,7 @@ ORYX.Core.Controls.Docker = ORYX.Core.Controls.Control.extend({
 		p = Object.clone(this.referencePoint);
 		
 		if(p && this._dockedShape){
-			var upL 
+			var upL;
 			if(this.parent instanceof ORYX.Core.Edge) {
 				upL = this._dockedShape.absoluteXY();
 			} else {
@@ -13946,7 +13953,7 @@ ORYX.Core.Controls.Docker = ORYX.Core.Controls.Control.extend({
 
 		// If there is an old docked Shape
 		if(this._dockedShape) {
-			this._dockedShape.bounds.unregisterCallback(this._updateCallback)
+			this._dockedShape.bounds.unregisterCallback(this._updateCallback);
 			
 			// Delete the Shapes from the incoming and outgoing array
 			// If this Docker the incoming of the Shape
@@ -14002,7 +14009,7 @@ ORYX.Core.Controls.Docker = ORYX.Core.Controls.Control.extend({
 			referencePoint = {
 				x: bounds.center().x - absUL.x,
 				y: bounds.center().y - absUL.y
-			}	
+			};
 						
 			this._dockedShapeBounds = this._dockedShape.bounds.clone();
 			
@@ -14560,7 +14567,7 @@ ORYX.Core.Node = {
 		var i=0;
 		do {
 			var isPointIncluded = this._svgShapes[i++].isPointIncluded( x, y );
-		} while( !isPointIncluded && i < this._svgShapes.length)
+		} while( !isPointIncluded && i < this._svgShapes.length);
 		
 		return isPointIncluded;
 
@@ -14669,9 +14676,10 @@ ORYX.Core.Node = {
 		var outgoing = data.findAll(function(ser){ return (ser.prefix+"-"+ser.name) == 'raziel-outgoing'});
 		outgoing.each((function(obj){
 			// TODO: Look at Canvas
-			if(!this.parent) {return};
-								
-			// Set outgoing Shape
+            if (!this.parent) {
+                return
+            }
+            // Set outgoing Shape
 			var next = this.getCanvas().getChildShapeByResourceId(obj.value);
 																	
 			if(next){
@@ -15306,7 +15314,7 @@ ORYX.Core.Edge = {
 					case "midtop":
 						var numOfDockers = this.dockers.length;
 						if(numOfDockers%2 == 0) {
-							var angle = this._getAngle(this.dockers[numOfDockers/2-1], this.dockers[numOfDockers/2])
+							var angle = this._getAngle(this.dockers[numOfDockers/2-1], this.dockers[numOfDockers/2]);
 							var pos1 = this.dockers[numOfDockers/2-1].bounds.center();
 							var pos2 = this.dockers[numOfDockers/2].bounds.center();
 							var pos = {x:(pos1.x + pos2.x)/2.0, y:(pos1.y+pos2.y)/2.0};
@@ -15323,7 +15331,7 @@ ORYX.Core.Edge = {
 							}
 						} else {
 							var index = parseInt(numOfDockers/2);
-							var angle = this._getAngle(this.dockers[index], this.dockers[index+1])
+							var angle = this._getAngle(this.dockers[index], this.dockers[index+1]);
 							var pos = this.dockers[index].bounds.center();
 							
 							if (angle <= 90 || angle > 270) {
@@ -15345,7 +15353,7 @@ ORYX.Core.Edge = {
 					case "midbottom":
 						var numOfDockers = this.dockers.length;
 						if(numOfDockers%2 == 0) {
-							var angle = this._getAngle(this.dockers[numOfDockers/2-1], this.dockers[numOfDockers/2])
+							var angle = this._getAngle(this.dockers[numOfDockers/2-1], this.dockers[numOfDockers/2]);
 							var pos1 = this.dockers[numOfDockers/2-1].bounds.center();
 							var pos2 = this.dockers[numOfDockers/2].bounds.center();
 							var pos = {x:(pos1.x + pos2.x)/2.0, y:(pos1.y+pos2.y)/2.0};
@@ -15362,7 +15370,7 @@ ORYX.Core.Edge = {
 							}
 						} else {
 							var index = parseInt(numOfDockers/2);
-							var angle = this._getAngle(this.dockers[index], this.dockers[index+1])
+							var angle = this._getAngle(this.dockers[index], this.dockers[index+1]);
 							var pos = this.dockers[index].bounds.center();
 							
 							if (angle <= 90 || angle > 270) {
@@ -15471,7 +15479,7 @@ ORYX.Core.Edge = {
 			this.relativizePoint(startPoint);
 			this.relativizePoint(endPoint);
 			
-			var newNodePosition = new Object();
+			var newNodePosition = {};
 			
 			/* Calculate new x-coordinate */
 			newNodePosition.x = startPoint.x 
@@ -15504,17 +15512,17 @@ ORYX.Core.Edge = {
 	 */
 	calculatePositionOfAttachedChildNode: function(node) {
 		/* Initialize position */
-		var position = new Object();
+		var position = {};
 		position.x = 0;
 		position.y = 0;
 		
 		/* Case: Node was just added */
 		if(!this.attachedNodePositionData[node.getId()]) {
-			this.attachedNodePositionData[node.getId()] = new Object();
+			this.attachedNodePositionData[node.getId()] = {};
 			this.attachedNodePositionData[node.getId()]
 					.relativDistanceFromDocker1 = 0;
 			this.attachedNodePositionData[node.getId()].node = node;
-			this.attachedNodePositionData[node.getId()].segment = new Object();
+			this.attachedNodePositionData[node.getId()].segment = {};
 			this.findEdgeSegmentForNode(node);
 		}else if(node.isChanged) {
 			this.findEdgeSegmentForNode(node);
@@ -15682,7 +15690,7 @@ ORYX.Core.Edge = {
 			};
 			docker.bounds.moveBy(off);
 			docker._dockedShapeBounds.moveBy(off);
-		}
+		};
 		
 		updateDocker(this.dockers.first());
 		updateDocker(this.dockers.last());
@@ -15740,7 +15748,7 @@ ORYX.Core.Edge = {
      */
     getIntersectionPoint: function(){
     
-        var length = Math.floor(this.dockers.length / 2)
+        var length = Math.floor(this.dockers.length / 2);
         
         return ORYX.Core.Math.midPoint(this.dockers[length - 1].bounds.center(), this.dockers[length].bounds.center())
     },
@@ -15923,7 +15931,7 @@ ORYX.Core.Edge = {
 										relativPartOfSegment / newFullDistance;
 				
 			}
-		})
+		});
 		
 		
 		// Update all labels reference points
@@ -16254,11 +16262,11 @@ ORYX.Core.Edge = {
 			if (ORYX.Core.Math.isPointInLine(cd.x, cd.y, cp.x, cp.y, cn.x, cn.y, 1)){
 				marked[i] = docker;
 			}
-		}.bind(this))
+		}.bind(this));
 		
 		marked.each(function(docker){
 			this.removeDocker(docker.value);
-		}.bind(this))
+		}.bind(this));
 		
 		if (marked.values().length > 0){
 			this._update(true);
@@ -16684,9 +16692,10 @@ ORYX.Core.Edge = {
 		var outgoing = data.findAll(function(ser){ return (ser.prefix+"-"+ser.name) == 'raziel-outgoing'});
 		outgoing.each((function(obj){
 			// TODO: Look at Canvas
-			if(!this.parent) {return};
-								
-			// Set outgoing Shape
+            if (!this.parent) {
+                return
+            }
+            // Set outgoing Shape
 			var next = this.getCanvas().getChildShapeByResourceId(obj.value);
 															
 			if(next){
@@ -17041,7 +17050,7 @@ ORYX.Plugins.AbstractPlugin = Clazz.extend({
 				newElement.type="hidden";
 				newElement.value = value;
 				return newElement
-			}
+			};
 			
 			submitForm.appendChild( createHiddenElement("download", content) );
 			submitForm.appendChild( createHiddenElement("file", filename) );
@@ -17259,7 +17268,7 @@ ORYX.Plugins.AbstractPlugin = Clazz.extend({
 						edge.removeUnusedDockers();
 						if (this.isBendPointIncluded(edge)){
 							this.plugin.doLayout(edge);
-							return;
+
 						}
 					}.bind(this));
 				
@@ -17467,7 +17476,7 @@ ORYX.Plugins.AbstractLayouter = ORYX.Plugins.AbstractPlugin.extend({
 		// Find all shapes which should be layouted
 		var toLayout = shapes.findAll(function(shape){
 			return this.isIncludedInLayout(shape) 
-		}.bind(this))
+		}.bind(this));
 		
 		// If there are shapes left 
 		if (toLayout.length > 0){
@@ -17495,7 +17504,7 @@ ORYX.Plugins.AbstractLayouter = ORYX.Plugins.AbstractPlugin.extend({
  */
 
 if (!ORYX.Plugins) 
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 
 ORYX.Plugins.Edit = Clazz.extend({
     
@@ -17908,7 +17917,7 @@ ORYX.Plugins.Edit.ClipBoard = Clazz.extend({
         this.shapesAsJson = shapes.map(function(shape){
             var s = shape.toJSON();
             s.parent = {resourceId : shape.getParentShape().resourceId};
-            s.parentIndex = shape.getParentShape().getChildShapes().indexOf(shape)
+            s.parentIndex = shape.getParentShape().getChildShapes().indexOf(shape);
             return s;
         });
     }
@@ -17979,7 +17988,7 @@ ORYX.Plugins.Edit.DeleteCommand = ORYX.Core.Command.extend({
  * @name ORYX.Plugins
 */
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 /**
  * The view plugin offers all of zooming functionality accessible over the 
@@ -18204,9 +18213,13 @@ ORYX.Plugins.View = Clazz.extend(ORYX.Plugins.View);
  * pursuant to a written agreement and any use of this program without such an
  * agreement is prohibited.
  */
-if(!Signavio){ var Signavio = {} };
-	if (!Signavio.Core) { Signavio.Core = {} };
-	Signavio.Core.Version = "1.0";
+if (!Signavio) {
+    var Signavio = {}
+}
+if (!Signavio.Core) {
+    Signavio.Core = {}
+}
+Signavio.Core.Version = "1.0";
 			/*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
  * License rights for this program may be obtained from Alfresco Software, Ltd.
@@ -18218,19 +18231,19 @@ if(!Signavio){ var Signavio = {} };
  */
 
 if (!Signavio) {
-	var Signavio = new Object();
+	var Signavio = {};
 }
 
 if (!Signavio.Plugins) {
-	Signavio.Plugins = new Object();
+	Signavio.Plugins = {};
 }
 
 if (!Signavio.Plugins.Utils) {
-	Signavio.Plugins.Utils = new Object();
+	Signavio.Plugins.Utils = {};
 }
 
 if (!Signavio.Helper) {
-	Signavio.Helper = new Object();
+	Signavio.Helper = {};
 }
 
 
@@ -18271,7 +18284,7 @@ new function() {
  */
 
 if (!ORYX.Plugins) {
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 }
 
 /**
@@ -18340,7 +18353,7 @@ ORYX.Plugins.Loading = {
 		}
 		
 	}
-}
+};
 
 ORYX.Plugins.Loading = Clazz.extend(ORYX.Plugins.Loading);
 /*
@@ -18350,7 +18363,7 @@ ORYX.Plugins.Loading = Clazz.extend(ORYX.Plugins.Loading);
  * agreement is prohibited.
  */
 if (!ORYX.Plugins) {
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 }
 
 /*
@@ -18394,9 +18407,9 @@ ORYX.Plugins.CanvasResize = Clazz.extend({
     			var move = position == "N" ? {x: 0, y: extentionSize}: {x: extentionSize, y: 0 };
 
     			// Move all children
-    			canvas.getChildNodes(false, function(shape){ shape.bounds.moveBy(move) })
+    			canvas.getChildNodes(false, function(shape){ shape.bounds.moveBy(move) });
     			// Move all dockers, when the edge has at least one docked shape
-    			var edges = canvas.getChildEdges().findAll(function(edge){ return edge.getAllDockedShapes().length > 0})
+    			var edges = canvas.getChildEdges().findAll(function(edge){ return edge.getAllDockedShapes().length > 0});
     			var dockers = edges.collect(function(edge){ return edge.dockers.findAll(function(docker){ return !docker.getDockedShape() })}).flatten();
     			dockers.each(function(docker){ docker.bounds.moveBy(move)})
     		} else if( position == "S" ){
@@ -18409,7 +18422,7 @@ ORYX.Plugins.CanvasResize = Clazz.extend({
     		
     		canvas.update();
     		facade.updateSelection();
-        }
+        };
 		
 		var commandClass = ORYX.Core.Command.extend({
 			construct: function(position, extentionSize, facade){
@@ -18580,7 +18593,7 @@ ORYX.Plugins.CanvasResizeButton = Clazz.extend({
  */
 
 if (!ORYX.Plugins) 
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 
 ORYX.Plugins.RenameShapes = Clazz.extend({
 
@@ -18858,7 +18871,7 @@ ORYX.Plugins.RenameShapes = Clazz.extend({
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 /**
  * Supports EPCs by offering a syntax check and export and import ability..
@@ -18992,12 +19005,12 @@ Array.prototype.insertFrom = function(from, to){
 	newA.push(el);
 	if(old.length > to ){
 		newA 	= newA.concat(old.slice(to))
-	};
-	return newA;
-}
+    }
+    return newA;
+};
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 
@@ -19139,13 +19152,13 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 				this.callback 	= callback;
 				this.elements 	= elements;
 				// For redo, the previous elements get stored
-				this.elAndIndex	= elements.map(function(el){ return {el:el, previous:el.parent.children[el.parent.children.indexOf(el)-1]} })
+				this.elAndIndex	= elements.map(function(el){ return {el:el, previous:el.parent.children[el.parent.children.indexOf(el)-1]} });
 				this.facade		= facade;
 			},			
 			execute: function(){
 				
 				// Call the defined z-order callback with the elements
-				this.callback( this.elements )			
+				this.callback( this.elements );
 				this.facade.setSelection( this.elements )
 			},
 			rollback: function(){
@@ -19163,8 +19176,8 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 					var p 			= el.parent;			
 					var oldIndex 	= p.children.indexOf(el);
 					var newIndex 	= p.children.indexOf(sortedEl[i].previous);
-					newIndex		= newIndex || 0
-					p.children 	= p.children.insertFrom(oldIndex, newIndex)			
+					newIndex		= newIndex || 0;
+					p.children 	= p.children.insertFrom(oldIndex, newIndex);
 					el.node.parentNode.insertBefore(el.node, el.node.parentNode.childNodes[newIndex+1]);
 				}
 
@@ -19196,7 +19209,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			if (p.children.last() === value){
 				return;
 			}
-			p.children = p.children.without( value )
+			p.children = p.children.without( value );
 			p.children.push(value);
 			value.node.parentNode.appendChild(value.node);			
 		});
@@ -19213,8 +19226,8 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 
 		// Sortiertes Array wird nach unten verschoben.
 		tmpElem.each( function(value) {
-			var p = value.parent
-			p.children = p.children.without( value )
+			var p = value.parent;
+			p.children = p.children.without( value );
 			p.children.unshift( value );
 			value.node.parentNode.insertBefore(value.node, value.node.parentNode.firstChild);
 		});
@@ -19240,7 +19253,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			if(el.node.previousSibling === null) { return; }
 			var p 		= el.parent;			
 			var index 	= p.children.indexOf(el);
-			p.children 	= p.children.insertFrom(index, index-1)			
+			p.children 	= p.children.insertFrom(index, index-1);
 			el.node.parentNode.insertBefore(el.node, el.node.previousSibling);
 		});
 		
@@ -19261,11 +19274,11 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			
 		// Sortiertes Array wird eine Ebene nach unten verschoben.
 		compactElem.each( function(el) {
-			var nextNode = el.node.nextSibling		
+			var nextNode = el.node.nextSibling;
 			if(nextNode === null) { return; }
 			var index 	= el.parent.children.indexOf(el);
 			var p 		= el.parent;
-			p.children 	= p.children.insertFrom(index, index+1)			
+			p.children 	= p.children.insertFrom(index, index+1);
 			el.node.parentNode.insertBefore(nextNode, el.node);
 		});
 	},
@@ -19283,7 +19296,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 		});
 		// Delete all attached intermediate events from the array
 		elements = elements.findAll(function(value) {
-			var d = value.getIncomingShapes()
+			var d = value.getIncomingShapes();
 			return d.length == 0 || !elements.include(d[0])
 		});
 		if(elements.length < 2) { return; }
@@ -19324,7 +19337,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
                         y: shape.bounds.upperLeft().y - (this.maxHeight - shape.bounds.height())/2},
                     b: {x: shape.bounds.lowerRight().x + (this.maxWidth - shape.bounds.width())/2,
                         y: shape.bounds.lowerRight().y + (this.maxHeight - shape.bounds.height())/2}
-	            }
+	            };
 				
 				/* If the new width of shape exceeds the maximum width, set width value to maximum. */
 				if(this.maxWidth > maxSize.width) {
@@ -19408,7 +19421,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 						var offset =  {
 							x: shape.bounds.upperLeft().x - newCoordinates.x,
 							y: shape.bounds.upperLeft().y - newCoordinates.y
-						}
+						};
 						// Set the new position
 						shape.bounds.moveTo(newCoordinates);
 						this.plugin.layoutEdges(shape, shape.getAllDockedShapes(),offset);
@@ -19429,7 +19442,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 				//this.facade.getCanvas().update();
 				//this.facade.updateSelection();
 			}
-		})
+		});
 		
 		var command = new commandClass(elements, bounds, maxHeight, maxWidth, parseInt(way), this);
 		
@@ -19446,7 +19459,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
  */
 
 if (!ORYX.Plugins) 
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 
 ORYX.Plugins.Save = Clazz.extend({
 	
@@ -19517,7 +19530,7 @@ ORYX.Plugins.Save = Clazz.extend({
  */
 
 if(!ORYX.Plugins) 
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 
@@ -19587,9 +19600,10 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 	handleMouseDown: function(event, uiObj) {
 		// If the selection Bounds not intialized and the uiObj is not member of current selectio
 		// then return
-		if(!this.dragBounds || !this.currentShapes.member(uiObj) || !this.toMoveShapes.length) {return;};
-		
-		// Start Dragging
+        if (!this.dragBounds || !this.currentShapes.member(uiObj) || !this.toMoveShapes.length) {
+            return;
+        }
+        // Start Dragging
 		this.dragEnable = true;
 		this.dragIntialized = true;
 		this.edgesMovable = true;
@@ -19615,7 +19629,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 		// Register on Global Mouse-UP Event
 		document.documentElement.addEventListener(ORYX.CONFIG.EVENT_MOUSEUP, this.callbackMouseUp, true);			
 
-		return;
+
 	},
 
 	/**
@@ -19683,12 +19697,12 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 						},
 						dock:function( toDockShape, parent, pos ){
 							// Add to the same parent Shape
-							parent.add( this.docker.parent )
+							parent.add( this.docker.parent );
 							
 							
 							// Set the Docker to the new Shape
 							this.docker.setDockedShape( undefined );
-							this.docker.bounds.centerMoveTo( pos )				
+							this.docker.bounds.centerMoveTo( pos );
 							this.docker.setDockedShape( toDockShape );	
 							//this.docker.update();
 							
@@ -19735,7 +19749,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 		document.documentElement.removeEventListener(ORYX.CONFIG.EVENT_MOUSEUP, this.callbackMouseUp, true);	
 		document.documentElement.removeEventListener(ORYX.CONFIG.EVENT_MOUSEMOVE, this.callbackMouseMove, false);				
 			
-		return;
+
 	},
 
 	/**
@@ -19744,8 +19758,10 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 	*/
 	handleMouseMove: function(event) {
 		// If dragging is not enabled, go return
-		if(!this.dragEnable) { return };
-		// If Dragging is initialized
+        if (!this.dragEnable) {
+            return
+        }
+        // If Dragging is initialized
 		if(this.dragIntialized) {
 			// Raise Event: Drag will be started
 			this.facade.raiseEvent({type:ORYX.CONFIG.EVENT_DRAGDROP_START});
@@ -19771,7 +19787,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 		// Calculate the new position
 		var position = {
 			x: Event.pointerX(event) - this.offSetPosition.x,
-			y: Event.pointerY(event) - this.offSetPosition.y}
+			y: Event.pointerY(event) - this.offSetPosition.y};
 
 		position.x 	-= this.offsetScroll.x - this.scrollNode.scrollLeft; 
 		position.y 	-= this.offsetScroll.y - this.scrollNode.scrollTop;
@@ -19793,13 +19809,13 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 		position.y /= this.faktorXY.y;
 
 		// Set that the position is not lower than zero
-		position.x = Math.max( 0 , position.x)
-		position.y = Math.max( 0 , position.y)
+		position.x = Math.max( 0 , position.x);
+		position.y = Math.max( 0 , position.y);
 
 		// Set that the position is not bigger than the canvas
 		var c = this.facade.getCanvas();
-		position.x = Math.min( c.bounds.width() - this.dragBounds.width(), 		position.x)
-		position.y = Math.min( c.bounds.height() - this.dragBounds.height(), 	position.y)	
+		position.x = Math.min( c.bounds.width() - this.dragBounds.width(), 		position.x);
+		position.y = Math.min( c.bounds.height() - this.dragBounds.height(), 	position.y);
 						
 
 		// Drag this bounds
@@ -19833,8 +19849,8 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 		
 		var underlyingNodes = $A(this.facade.getCanvas().getAbstractShapesAtPosition(eventCoordinates));
 		
-		var checkIfAttachable = this.toMoveShapes.length == 1 && this.toMoveShapes[0] instanceof ORYX.Core.Node && this.toMoveShapes[0].dockers.length > 0
-		checkIfAttachable	= checkIfAttachable && underlyingNodes.length != 1
+		var checkIfAttachable = this.toMoveShapes.length == 1 && this.toMoveShapes[0] instanceof ORYX.Core.Node && this.toMoveShapes[0].dockers.length > 0;
+		checkIfAttachable	= checkIfAttachable && underlyingNodes.length != 1;
 		
 			
 		if (!checkIfAttachable &&
@@ -19910,7 +19926,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 
 		// Stop the Event
 		//Event.stop(event);
-		return;
+
 	},
 	
 //	/**
@@ -20078,7 +20094,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 					var allEdges = [].concat(this.shape.getIncomingShapes())
 						.concat(this.shape.getOutgoingShapes())
 						// Remove all edges which are included in the selection from the list
-						.findAll(function(r){ return r instanceof ORYX.Core.Edge }.bind(this))
+						.findAll(function(r){ return r instanceof ORYX.Core.Edge }.bind(this));
 												
 					this.plugin.layoutEdges(this.shape, allEdges, offset);
 
@@ -20182,7 +20198,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 			}//);
 			// Show all labels at docked shapes
 			//shape.getAllDockedShapes().each(function(dockedShape) {
-			var allDockedShapes = shape.getAllDockedShapes()
+			var allDockedShapes = shape.getAllDockedShapes();
 			for(var i=0; i<allDockedShapes.length ;i++){
 				var dockedShape = allDockedShapes[i];				
 				var labels = dockedShape.getLabels();
@@ -20328,7 +20344,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 				this.distPoints = [];
 
 				if (this.distPointTimeout)
-					window.clearTimeout(this.distPointTimeout)
+					window.clearTimeout(this.distPointTimeout);
 				
 				this.distPointTimeout = window.setTimeout(function(){
 					// Get all the shapes, there will consider at snapping
@@ -20340,7 +20356,7 @@ ORYX.Plugins.DragDropResize = ORYX.Plugins.AbstractPlugin.extend({
 							parentShape = parentShape.parent
 						}
 						return true;
-					})
+					});
 					
 					// The current selection will delete from this array
 					//elements.each(function(shape) {
@@ -20814,13 +20830,20 @@ ORYX.Plugins.Resizer = Clazz.extend({
 		if(!this.bounds) { return; }
 
 		var upL = this.bounds.upperLeft();
-		
-		if(this.bounds.width() < this.minSize.width)	{ this.bounds.set(upL.x, upL.y, upL.x + this.minSize.width, upL.y + this.bounds.height());};
-		if(this.bounds.height() < this.minSize.height)	{ this.bounds.set(upL.x, upL.y, upL.x + this.bounds.width(), upL.y + this.minSize.height);};
-		if(this.bounds.width() > this.maxSize.width)	{ this.bounds.set(upL.x, upL.y, upL.x + this.maxSize.width, upL.y + this.bounds.height());};
-		if(this.bounds.height() > this.maxSize.height)	{ this.bounds.set(upL.x, upL.y, upL.x + this.bounds.width(), upL.y + this.maxSize.height);};
 
-		var a = this.canvasNode.getScreenCTM();
+if (this.bounds.width() < this.minSize.width) {
+            this.bounds.set(upL.x, upL.y, upL.x + this.minSize.width, upL.y + this.bounds.height());
+        }
+        if (this.bounds.height() < this.minSize.height) {
+            this.bounds.set(upL.x, upL.y, upL.x + this.bounds.width(), upL.y + this.minSize.height);
+        }
+        if (this.bounds.width() > this.maxSize.width) {
+            this.bounds.set(upL.x, upL.y, upL.x + this.maxSize.width, upL.y + this.bounds.height());
+        }
+        if (this.bounds.height() > this.maxSize.height) {
+            this.bounds.set(upL.x, upL.y, upL.x + this.bounds.width(), upL.y + this.maxSize.height);
+        }
+        var a = this.canvasNode.getScreenCTM();
 	    
 		upL.x *= a.a;
 		upL.y *= a.d;
@@ -20888,7 +20911,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 		this.dockedNodes= moveShapes.findAll(function(shape){ return shape instanceof ORYX.Core.Node && shape.dockers.length == 1}).collect(function(shape){ return {docker:shape.dockers[0], dockedShape:shape.dockers[0].getDockedShape(), refPoint:shape.dockers[0].referencePoint} });
 	},			
 	execute: function(){
-		this.dockAllShapes()				
+		this.dockAllShapes();
 		// Moves by the offset
 		this.move( this.offset);
 		// Addes to the new parents
@@ -20904,7 +20927,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 		this.move( offset );
 		// Addes to the old parents
 		this.addShapeToParent( this.oldParents ); 
-		this.dockAllShapes(true)	
+		this.dockAllShapes(true);
 		
 		// Set the selection to the current selection
 		this.selectCurrentShapes();
@@ -20923,7 +20946,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 				
 				(value.dockers||[]).each(function(d){
 					d.bounds.moveBy(offset);
-				})
+				});
 				
 				// Update all Dockers of Child shapes
 				/*var childShapesNodes = value.getChildShapes(true).findAll(function(shape){ return shape instanceof ORYX.Core.Node });							
@@ -20947,7 +20970,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 					.findAll(function(r){ return	r instanceof ORYX.Core.Edge && !this.moveShapes.any(function(d){ return d == r || (d instanceof ORYX.Core.Controls.Docker && d.parent == r)}) }.bind(this))
 					// Remove all edges which are between the node and a node contained in the selection from the list
 					.findAll(function(r){ return 	(r.dockers.first().getDockedShape() == value || !this.moveShapes.include(r.dockers.first().getDockedShape())) &&  
-													(r.dockers.last().getDockedShape() == value || !this.moveShapes.include(r.dockers.last().getDockedShape()))}.bind(this))
+													(r.dockers.last().getDockedShape() == value || !this.moveShapes.include(r.dockers.last().getDockedShape()))}.bind(this));
 													
 				// Layout all outgoing/incoming edges
 				this.plugin.layoutEdges(value, allEdges, offset);
@@ -20958,7 +20981,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 					// Remove all edges which are included in the selection from the list
 					.findAll(function(r){ return r instanceof ORYX.Core.Edge && r.dockers.first().isDocked() && r.dockers.last().isDocked() && !this.moveShapes.include(r) && !this.moveShapes.any(function(d){ return d == r || (d instanceof ORYX.Core.Controls.Docker && d.parent == r)}) }.bind(this))
 					// Remove all edges which are included in the selection from the list
-					.findAll(function(r){ return this.moveShapes.indexOf(r.dockers.first().getDockedShape()) > i ||  this.moveShapes.indexOf(r.dockers.last().getDockedShape()) > i}.bind(this))
+					.findAll(function(r){ return this.moveShapes.indexOf(r.dockers.first().getDockedShape()) > i ||  this.moveShapes.indexOf(r.dockers.last().getDockedShape()) > i}.bind(this));
 
 				for (var j = 0; j < allSameEdges.length; j++) {
 					for (var k = 1; k < allSameEdges[j].dockers.length-1; k++) {
@@ -20990,7 +21013,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 		for (var i = 0; i < this.dockedNodes.length; i++) {
 			var docker = this.dockedNodes[i].docker;
 			
-			docker.setDockedShape( shouldDocked ? this.dockedNodes[i].dockedShape : undefined )
+			docker.setDockedShape( shouldDocked ? this.dockedNodes[i].dockedShape : undefined );
 			if (docker.getDockedShape()) {
 				docker.setReferencePoint(this.dockedNodes[i].refPoint);
 				//docker.update();
@@ -21024,7 +21047,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
 				// Set the new position
 				if(currentShape instanceof ORYX.Core.Node && currentShape.dockers.length == 1){
 					var b = currentShape.bounds;
-					x += b.width()/2;y += b.height()/2
+					x += b.width()/2;y += b.height()/2;
 					currentShape.dockers.first().bounds.centerMoveTo(x, y);
 				} else {
 					currentShape.bounds.moveTo(x, y);
@@ -21052,7 +21075,7 @@ ORYX.Core.Command.Move = ORYX.Core.Command.extend({
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 ORYX.Plugins.DragDocker = Clazz.extend({
 
@@ -21384,9 +21407,8 @@ ORYX.Plugins.DragDocker = Clazz.extend({
 				this.docker.parent.dockers.each((function(docker){
 					if (this.docker == docker) {
 						return
-					};
-					
-					var center = docker.referencePoint ? docker.getAbsoluteReferencePoint() : docker.bounds.center();
+                    }
+                    var center = docker.referencePoint ? docker.getAbsoluteReferencePoint() : docker.bounds.center();
 					
 					nearestX = Math.abs(nearestX) > Math.abs(center.x - dockerCenter.x) ? center.x - dockerCenter.x : nearestX;
 					nearestY = Math.abs(nearestY) > Math.abs(center.y - dockerCenter.y) ? center.y - dockerCenter.y : nearestY;
@@ -21606,7 +21628,7 @@ ORYX.Plugins.DragDocker = Clazz.extend({
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 ORYX.Plugins.AddDocker = Clazz.extend({
 
@@ -21719,7 +21741,7 @@ ORYX.Plugins.AddDocker = Clazz.extend({
                 this.facade.getCanvas().update();
                 this.facade.updateSelection();
             }
-        })
+        });
         
         var command = new commandClass(this.enabledAdd(), this.enabledRemove(), options.edge, options.docker, options.position, this.facade);
         
@@ -21738,7 +21760,7 @@ ORYX.Plugins.AddDocker = Clazz.extend({
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
  ORYX.Plugins.SelectionFrame = Clazz.extend({
 
@@ -21946,7 +21968,7 @@ if(!ORYX.Plugins)
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object(); 
+	ORYX.Plugins = {};
 
 ORYX.Plugins.ShapeHighlighting = Clazz.extend({
 
@@ -22014,7 +22036,7 @@ ORYX.Plugins.ShapeHighlighting = Clazz.extend({
 			// Set like this
 			var bo = options.elements[0].absoluteBounds();
 			
-			var strWidth = options.strokewidth ? options.strokewidth 	: ORYX.CONFIG.BORDER_OFFSET
+			var strWidth = options.strokewidth ? options.strokewidth 	: ORYX.CONFIG.BORDER_OFFSET;
 			
 			node.setAttributeNS(null, "d", this.getPathRectangle( bo.a, bo.b , strWidth ) );
 			node.setAttributeNS(null, "stroke", 		options.color 		? options.color 		: ORYX.CONFIG.SELECTION_HIGHLIGHT_COLOR);
@@ -22055,14 +22077,14 @@ ORYX.Plugins.ShapeHighlighting = Clazz.extend({
 		// Get the padding and the size
 		var padding = ORYX.CONFIG.SELECTED_AREA_PADDING;
 		
-		var path = ""
+		var path = "";
 		
 		// Get thru all Elements
 		elements.each((function(element) {
 			if(!element) {return}
 			// Get the absolute Bounds and the two Points
 			var bounds = element.absoluteBounds();
-			bounds.widen(padding)
+			bounds.widen(padding);
 			var a = bounds.upperLeft();
 			var b = bounds.lowerRight();
 			
@@ -22084,7 +22106,7 @@ ORYX.Plugins.ShapeHighlighting = Clazz.extend({
 
 		var size = ORYX.CONFIG.SELECTION_HIGHLIGHT_SIZE;
 				
-		var path = ""
+		var path = "";
 
 		// Set: Upper left 
 		path = path + "M" + a.x + " " + (a.y + size) + " l0 -" + size + " l" + size + " 0 ";
@@ -22102,7 +22124,7 @@ ORYX.Plugins.ShapeHighlighting = Clazz.extend({
 
 		var size = ORYX.CONFIG.SELECTION_HIGHLIGHT_SIZE;
 
-		var path 	= ""
+		var path 	= "";
 		var offset 	= strokeWidth / 2.0;
 		 
 		// Set: Upper left 
@@ -22185,7 +22207,7 @@ ORYX.Plugins.HighlightingSelectedShapes = Clazz.extend({
  */
 
 if (!ORYX.Plugins) 
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 
 ORYX.Plugins.Overlay = Clazz.extend({
 
@@ -22202,8 +22224,8 @@ ORYX.Plugins.Overlay = Clazz.extend({
 		this.facade.registerOnEvent(ORYX.CONFIG.EVENT_OVERLAY_SHOW, this.show.bind(this));
 		this.facade.registerOnEvent(ORYX.CONFIG.EVENT_OVERLAY_HIDE, this.hide.bind(this));	
 
-		this.styleNode = document.createElement('style')
-		this.styleNode.setAttributeNS(null, 'type', 'text/css')
+		this.styleNode = document.createElement('style');
+		this.styleNode.setAttributeNS(null, 'type', 'text/css');
 		
 		document.getElementsByTagName('head')[0].appendChild( this.styleNode )
 
@@ -22250,7 +22272,7 @@ ORYX.Plugins.Overlay = Clazz.extend({
 
 		}	
 		
-		var isSVG = true
+		var isSVG = true;
 		try {
 			isSVG = options.node && options.node instanceof SVGElement;
 		} catch(e){}
@@ -22258,7 +22280,7 @@ ORYX.Plugins.Overlay = Clazz.extend({
 		// Checks if node is setted and if this is an SVGElement		
 		if ( options.node && isSVG) {
 			
-			options["_temps"] = []
+			options["_temps"] = [];
 						
 			// FOR EACH - Node
 			options.shapes.each(function(el, index){
@@ -22266,11 +22288,11 @@ ORYX.Plugins.Overlay = Clazz.extend({
 				// Checks if the node is a Shape
 				if( !el instanceof ORYX.Core.Shape){ return }
 				
-				var _temp = {}
+				var _temp = {};
 				_temp.svg = options.dontCloneNode ? options.node : options.node.cloneNode( true );
 				
 				// Add the svg node to the ORYX-Shape
-				el.node.firstChild.appendChild( _temp.svg )		
+				el.node.firstChild.appendChild( _temp.svg );
 				
 				// If
 				if (el instanceof ORYX.Core.Edge && !options.nodePosition) {
@@ -22328,7 +22350,7 @@ ORYX.Plugins.Overlay = Clazz.extend({
 						
 						_temp.svg.setAttributeNS(null, "transform", "translate(" + x + ", " + y + ")")
 					
-					}.bind(this)
+					}.bind(this);
 					
 					_temp.element = el;
 					_temp.callback();
@@ -22423,19 +22445,19 @@ ORYX.Plugins.Overlay = Clazz.extend({
 		
 		
 		// Get all the childs from ME
-		var childs = this.getAllChilds( node.firstChild.firstChild )
+		var childs = this.getAllChilds( node.firstChild.firstChild );
 		
-		var ids = []
+		var ids = [];
 		
 		// Add all Attributes which have relation to another node in this document and concate the pure id out of it
 		// This is for example important for the markers of a edge
-		childs.each(function(e){ ids.push( $A(e.attributes).findAll(function(attr){ return attr.nodeValue.startsWith('url(#')}) )})
+		childs.each(function(e){ ids.push( $A(e.attributes).findAll(function(attr){ return attr.nodeValue.startsWith('url(#')}) )});
 		ids = ids.flatten().compact();
 		ids = ids.collect(function(s){return s.nodeValue}).uniq();
-		ids = ids.collect(function(s){return s.slice(5, s.length-1)})
+		ids = ids.collect(function(s){return s.slice(5, s.length-1)});
 		
 		// Add the node ID to the id
-		ids.unshift( node.id + ' .me')
+		ids.unshift( node.id + ' .me');
 		
 		var attr				= $H(attributes);
         var attrValue			= attr.toJSON().gsub(',', ';').gsub('"', '');
@@ -22448,10 +22470,10 @@ ORYX.Plugins.Overlay = Clazz.extend({
         }
                 	
         // Create the CSS-Tags Style out of the ids and the attributes
-        csstags = ids.collect(function(s, i){return "#" + s + " * " + (!i? attrValue : attrMarkerValue) + "" + (attrTextValue ? " #" + s + " text * " + attrTextValue : "") })
+        csstags = ids.collect(function(s, i){return "#" + s + " * " + (!i? attrValue : attrMarkerValue) + "" + (attrTextValue ? " #" + s + " text * " + attrTextValue : "") });
 		
 		// Join all the tags
-		var s = csstags.join(" ") + "\n" 
+		var s = csstags.join(" ") + "\n";
 		
 		// And add to the end of the style tag
 		this.styleNode.appendChild(document.createTextNode(s));
@@ -22478,11 +22500,11 @@ ORYX.Plugins.Overlay = Clazz.extend({
 	
 	getAllChilds: function( node ){
 		
-		var childs = $A(node.childNodes)
+		var childs = $A(node.childNodes);
 		
 		$A(node.childNodes).each(function( e ){ 
 		        childs.push( this.getAllChilds( e ) )
-		}.bind(this))
+		}.bind(this));
 
     	return childs.flatten();
 	}
@@ -22500,7 +22522,7 @@ ORYX.Plugins.Overlay = Clazz.extend({
  */
 
 if (!ORYX.Plugins) 
-    ORYX.Plugins = new Object();
+    ORYX.Plugins = {};
 
 ORYX.Plugins.KeysMove = ORYX.Plugins.AbstractPlugin.extend({
 
@@ -22907,7 +22929,7 @@ new function(){
 			
 			// Calc center position, between a and b
 			// depending on there weight
-			var m = {}
+			var m = {};
 			m.x = a.x < b.x ? 
 					(((b.x - bb.width()/2) - (a.x + ab.width()/2))/2) + (a.x + ab.width()/2): 
 					(((a.x - ab.width()/2) - (b.x + bb.width()/2))/2) + (b.x + bb.width()/2);
@@ -23002,7 +23024,7 @@ new function(){
 			// If reverse is set
 			if (reverse) {
 				// Reverse d1 and d2
-				d1 = d1=="t"?"b":(d1=="r"?"l":(d1=="b"?"t":(d1=="l"?"r":"r")))
+				d1 = d1=="t"?"b":(d1=="r"?"l":(d1=="b"?"t":(d1=="l"?"r":"r")));
 				d2 = d2=="t"?"b":(d2=="r"?"l":(d2=="b"?"t":(d2=="l"?"r":"r")))
 			}
 			
@@ -23024,13 +23046,13 @@ new function(){
 			 */
 			var sameDirection = function(direction, center1, center2){
 				switch(direction){
-					case "t": return Math.abs(center1.x - center2.x) < 2 && center1.y < center2.y
-					case "r": return center1.x > center2.x && Math.abs(center1.y - center2.y) < 2
-					case "b": return Math.abs(center1.x - center2.x) < 2 && center1.y > center2.y
-					case "l": return center1.x < center2.x && Math.abs(center1.y - center2.y) < 2
+					case "t": return Math.abs(center1.x - center2.x) < 2 && center1.y < center2.y;
+					case "r": return center1.x > center2.x && Math.abs(center1.y - center2.y) < 2;
+					case "b": return Math.abs(center1.x - center2.x) < 2 && center1.y > center2.y;
+					case "l": return center1.x < center2.x && Math.abs(center1.y - center2.y) < 2;
 					default: return false;
 				}
-			}
+			};
 
 			// Check if there are same incoming edges from 'from'
 			var sameIncomingFrom = from
@@ -23083,7 +23105,7 @@ new function(){
 			// Update all dockers from the edge
 			edge.dockers.each(function(docker){
 				docker.update()
-			})
+			});
 			
 			// Update edge
 			//edge.refresh();
@@ -23093,7 +23115,7 @@ new function(){
 	});
 	
 	
-}()
+}();
 /*
  * Copyright 2005-2014 Alfresco Software, Ltd. All rights reserved.
  * License rights for this program may be obtained from Alfresco Software, Ltd.
@@ -23105,7 +23127,7 @@ new function(){
  */
 
 if(!ORYX.Plugins)
-	ORYX.Plugins = new Object();
+	ORYX.Plugins = {};
 
 new function(){
 	
@@ -23192,7 +23214,7 @@ new function(){
                                 } else {
                                         return false;
                                 }
-                        }.bind(this))
+                        }.bind(this));
                        
                         if (unselectLanes.length > 0 && pools.length > 0){
                                 selection = selection.without.apply(selection, unselectLanes);
@@ -23214,7 +23236,7 @@ new function(){
                        
                                 var isLeafFn = function(leaf){
                                         return !leaf.getChildNodes().any(function(r){ return r.getStencil().idWithoutNs() === "Lane"});
-                                }
+                                };
                                
                                 var isLeaf = isLeafFn(sh);
                                 var parentHasMoreLanes = parent.getChildNodes().any(function(r){ return r.getStencil().idWithoutNs() === "Lane"});
@@ -23336,7 +23358,7 @@ new function(){
 				.flatten();
 	
 			var abs = shape.absoluteBounds();
-			abs.moveBy(-offset.x, -offset.y)
+			abs.moveBy(-offset.x, -offset.y);
 			var obj = {};
 			dockers.each(function(docker){
 				
@@ -23376,7 +23398,7 @@ new function(){
 					docker:docker,
 					offset:off
 				}
-			})
+			});
 			
 			// Set dockers
 			this.facade.executeCommands([new ORYX.Core.MoveDockersCommand(obj)]);
@@ -23510,7 +23532,7 @@ new function(){
                 var hashedPositions = $H({});
                 allLanes.each(function(lane){
                         hashedPositions[lane.id] = lane.bounds.upperLeft();
-                })
+                });
                
                
                
@@ -23682,7 +23704,7 @@ new function(){
                                 var hp2 = $H({});
                                 allLanes.each(function(lane){
                                         hp2[lane.id] = lane.bounds.upperLeft();
-                                })
+                                });
                        
                                 var command = new LanesHasBeenReordered(hashedPositions, hp2, allLanes, this, pool.id);
                                 this.facade.executeCommands([command]);
@@ -23714,7 +23736,7 @@ new function(){
         },
        
         shouldScale: function(element){
-                var childLanes = element.getChildNodes().findAll(function(shape){ return shape.getStencil().id().endsWith("Lane") })
+                var childLanes = element.getChildNodes().findAll(function(shape){ return shape.getStencil().id().endsWith("Lane") });
                 return childLanes.length > 1 || childLanes.any(function(lane){ return this.shouldScale(lane) }.bind(this))
         },
        
@@ -24034,7 +24056,7 @@ new function(){
                                 var edges = [].concat(children[j].getIncomingShapes())
                                         .concat(children[j].getOutgoingShapes())
                                         // Remove all edges which are included in the selection from the list
-                                        .findAll(function(r){ return r instanceof ORYX.Core.Edge })
+                                        .findAll(function(r){ return r instanceof ORYX.Core.Edge });
 
                                 k=-1;
                                 while (++k < edges.length) {                    
@@ -24119,7 +24141,7 @@ new function(){
                                         s.shape.bounds.moveBy(-s.xOffset, 0);
                                 });
                         }
-                })
+                });
                
                
                 // Set dockers
@@ -24377,7 +24399,7 @@ new function(){
                         if(!this.changes[childLane.getId()] && childLane !== this.lane && childLane !== this.shape) {
                                 this.changes[childLane.getId()] = this.computeChanges(childLane, this.parent, this.parent, 0);
                         }
-                }.bind(this))
+                }.bind(this));
                        
                 // Update
                 this.update();
@@ -24507,4 +24529,4 @@ new function(){
 		
 	ORYX.Plugins.BPMN2_0 = ORYX.Plugins.AbstractPlugin.extend(ORYX.Plugins.BPMN2_0);
 	
-}()	
+}();

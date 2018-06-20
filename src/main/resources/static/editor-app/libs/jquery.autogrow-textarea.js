@@ -50,7 +50,7 @@
                 shadow.css('width', $self.width());
                 shadow.html(val + (noFlickerPad === 0 ? '...' : '')); // Append '...' to resize pre-emptively.
                 $self.height(Math.max(shadow.height() + noFlickerPad, minHeight));
-            }
+            };
 
             $self.change(update).keyup(update).keydown({event:'keydown'},update);
             $(window).resize(update);
