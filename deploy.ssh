@@ -1,0 +1,2 @@
+mvn package -Dmaven.test.skip=true;
+scp ./target/workflow-1.0-SNAPSHOT.jar webapp@10.10.50.10:/home/webapp/activiti.jar;
