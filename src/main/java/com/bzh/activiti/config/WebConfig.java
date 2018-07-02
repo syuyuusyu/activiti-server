@@ -19,7 +19,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                         "http://10.10.50.14:3000",
                         "http://10.10.50.17:3000",
                         "http://localhost:3000",
-                        "http://127.0.0.1:3000")
+                        "http://127.0.0.1:3000",
+                        "http://10.10.50.9",
+                        "http://10.10.50.16",
+                        "http://isp.yndk.cn"
+                )
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .maxAge(3600)
                 .allowCredentials(true);

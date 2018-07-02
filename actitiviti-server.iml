@@ -179,5 +179,10 @@
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-codec:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-css:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-diagram-rest:5.21.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.amqp:spring-rabbit:1.5.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.amqp:spring-amqp:1.7.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:1.2.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.rabbitmq:http-client:1.0.0.RELEASE" level="project" />
   </component>
 </module>

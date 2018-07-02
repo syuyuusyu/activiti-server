@@ -83,6 +83,7 @@ public class RemoteRestFulService {
         map.forEach((s,o)->{
             strmap.put(s,o.toString());
         });
+
         return strmap;
     }
 }

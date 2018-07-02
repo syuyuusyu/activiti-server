@@ -30,8 +30,6 @@ public class ActModelController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Value("${selfProperties.activitiIp}")
-    String activitiIp;
 
 //    @Autowired
 //    InvokeEntity createModels;

@@ -1,6 +1,10 @@
 package test;
 
 import com.bzh.activiti.Application;
+import com.bzh.activiti.entity.RabbitmqMessage;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import org.activiti.engine.*;
 import org.activiti.engine.form.FormData;
 import org.activiti.engine.form.FormProperty;
@@ -15,15 +19,22 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -46,6 +57,12 @@ public class Testuser {
 
     @Autowired
     HistoryService historyService;
+
+    @Value("${selfProperties.rabbitmqUrl}")
+    String rabbitmqUrl;
+
+    @Value("${selfProperties.queueName}")
+    String queueName;
 
     // 用户 管理 的 API 演示
     @org.junit.Test
@@ -180,5 +197,37 @@ public class Testuser {
         scanner.close();
     }
 
+
+    @Test
+    public void test3(){
+        //创建连接工厂
+        ConnectionFactory factory = new ConnectionFactory();
+
+
+
+        try {
+            factory.setUri(rabbitmqUrl);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+        //创建一个新的连接
+        Connection connection=null;
+        Channel channel=null;
+
+        try {
+            connection=factory.newConnection();
+            System.out.println("channel = " + channel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
