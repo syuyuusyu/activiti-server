@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,13 @@ public class TaskController {
         List<Task> list=taskService.createTaskQuery().taskAssignee(userId).list();
         list.addAll(taskService.createTaskQuery().taskCandidateUser(userId).list());
 
-        return list.stream().map(TaskResponse::new).collect(Collectors.toList());
+
+        return list.stream()
+//                .map(T->{
+//                    T.setName(userId+""+T.getName());
+//                    return T;
+//                })
+                .map(TaskResponse::new).collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/userTask/list",method = RequestMethod.GET)
