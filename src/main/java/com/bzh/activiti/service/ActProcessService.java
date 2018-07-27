@@ -78,6 +78,7 @@ public class ActProcessService {
 		}
 		
 		InputStream resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), resourceName);
+
 		return resourceAsStream;
 	}
 	

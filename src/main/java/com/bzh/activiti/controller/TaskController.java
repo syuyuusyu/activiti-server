@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +42,11 @@ public class TaskController {
 
 
         return list.stream()
-//                .map(T->{
-//                    T.setName(userId+""+T.getName());
-//                    return T;
-//                })
+                .map(T->{
+                    String previousUser= (String) taskService.getVariable(T.getId(),"previousUser");
+                    T.setOwner(previousUser);
+                    return T;
+                })
                 .map(TaskResponse::new).collect(Collectors.toList());
     }
 

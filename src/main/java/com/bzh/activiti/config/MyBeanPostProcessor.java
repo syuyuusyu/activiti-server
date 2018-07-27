@@ -32,6 +32,9 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
             types.add(new JavascriptFormType());
             types.add(new DynamicForm());
             pc.setCustomFormTypes(types);
+            pc.setActivityFontName("Menlo");
+            pc.setLabelFontName("Menlo");
+            
             return pc;
         }
         return bean;
