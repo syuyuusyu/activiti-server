@@ -34,7 +34,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
             pc.setCustomFormTypes(types);
             pc.setActivityFontName("Menlo");
             pc.setLabelFontName("Menlo");
-            
+
             return pc;
         }
         return bean;
