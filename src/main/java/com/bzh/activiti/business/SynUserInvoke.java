@@ -22,7 +22,6 @@ public class SynUserInvoke implements JavaDelegate{
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-
         String username= (String) execution.getVariable("applyUser");
         String applySystemCode= (String) execution.getVariable("applySystemCode");
         String opType=(String) execution.getVariable("opType");

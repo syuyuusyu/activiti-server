@@ -34,7 +34,6 @@ public class TaskController {
 
 
     @RequestMapping(value = "/userTask/{userId}",method = RequestMethod.GET)
-    @ResponseBody
     public List<TaskResponse> userTask(@PathVariable(name="userId") String userId){
 
         List<Task> list=taskService.createTaskQuery().taskAssignee(userId).list();
@@ -51,7 +50,6 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/userTask/list",method = RequestMethod.GET)
-    @ResponseBody
     public List<TaskResponse> teskList(){
 
 
@@ -87,7 +85,6 @@ public class TaskController {
     }
 
     @RequestMapping(value="/userTask/variables/{taskId}/{variableName}")
-    @ResponseBody
     public Map<String,Object> variables(@PathVariable(name="taskId") String taskId,
                                               @PathVariable(name="variableName") String variableName){
         Map<String,Object> map=new HashMap<>();
@@ -96,7 +93,6 @@ public class TaskController {
     }
 
     @RequestMapping(value="/userTask/processDefinitionKey/{taskId}")
-    @ResponseBody
     public Map<String,String> getProcessDefinitionKey(@PathVariable(name="taskId") String taskId){
         Map<String,String> map=new HashMap<>();
         Task task= taskService.createTaskQuery().taskId(taskId).singleResult();
