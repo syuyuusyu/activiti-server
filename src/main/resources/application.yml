@@ -6,6 +6,8 @@
 spring:
   application:
     name: activiti-server
+  activiti:
+    check-process-definitions: false
   datasource:
     #数据库初始化
     # schema: classpath:schema/inital.sql
