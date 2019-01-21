@@ -2,8 +2,14 @@ package test;
 
 import org.junit.Test;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,4 +45,17 @@ public class MonalTest {
             }
         });
     }
+
+    @Test
+    public void test3() throws AWTException, InterruptedException, URISyntaxException, IOException {
+        Robot robot=new Robot();
+        robot.setAutoDelay(1000);
+        while (true){
+            Thread.sleep(1100);
+            robot.keyPress(KeyEvent.VK_K);
+
+        }
+    }
+
+
 }

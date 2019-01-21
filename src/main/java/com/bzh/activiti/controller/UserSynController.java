@@ -44,7 +44,6 @@ public class UserSynController {
         identityService.createUserQuery().list().stream().map(u->u.getId()).forEach(identityService::deleteUser);
         identityService.createGroupQuery().list().stream().map(g->g.getId()).forEach(identityService::deleteGroup);
 
-
         try {
             entity.getUsernames().stream().map(identityService::newUser).forEach(identityService::saveUser);
             entity.getGroupnames().stream().map(identityService::newGroup).forEach(identityService::saveGroup);

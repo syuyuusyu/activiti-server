@@ -17,7 +17,7 @@ public class ActMsgConsumer extends DefaultConsumer {
 
     public ActMsgConsumer(Channel channel) {
         super(channel);
-        System.out.println("ActMsgConsumer iniyal" );
+        System.out.println("ActMsgConsumer inital" );
     }
 
     public void handleDelivery(String consumerTag, Envelope envelope,

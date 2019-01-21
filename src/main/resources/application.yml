@@ -118,8 +118,8 @@ server:
 
 selfProperties:
   ispIp: http://127.0.0.1:7001
-  rabbitmqUrl: amqp://guest:guest@localhost:5672
-  #rabbitmqUrl: amqp://admin:123456@10.10.50.10:5672
+  #rabbitmqUrl: amqp://guest:guest@localhost:5672
+  rabbitmqUrl: amqp://admin:123456@10.10.50.10:5672
   queueName: activitiQueue
 
 

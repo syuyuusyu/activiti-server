@@ -39,7 +39,6 @@ public class TaskController {
         List<Task> list=taskService.createTaskQuery().taskAssignee(userId).list();
         list.addAll(taskService.createTaskQuery().taskCandidateUser(userId).list());
 
-
         return list.stream()
                 .map(T->{
                     String previousUser= (String) taskService.getVariable(T.getId(),"previousUser");
@@ -57,7 +56,6 @@ public class TaskController {
                 .stream().map(TaskResponse::new)
                 .map(t->{
                     String taskId=t.getId();
-
                     return t;
                 })
                 .collect(Collectors.toList());
