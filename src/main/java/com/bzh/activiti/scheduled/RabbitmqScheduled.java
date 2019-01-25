@@ -28,8 +28,9 @@ public class RabbitmqScheduled {
 
     public final static long ONE_Hour =  ONE_Minute*60;
 
-    @Scheduled(fixedDelay=5*ONE_SCEND,initialDelay=ONE_Minute)
+    @Scheduled(fixedDelay=5*ONE_SCEND,initialDelay=20*ONE_SCEND)
     public void schedulQueue(){
+        logger.info(RabbitmqMessage.RabbitQueue.size()+" ----");
         List<RabbitmqMessage> removeQ=new ArrayList<>();
         RabbitmqMessage.RabbitQueue.forEach(m->{
 
