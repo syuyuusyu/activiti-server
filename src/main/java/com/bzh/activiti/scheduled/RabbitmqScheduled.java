@@ -48,7 +48,6 @@ public class RabbitmqScheduled {
             List<Task> list=taskService.createTaskQuery().taskAssignee(m.getAssigneeName()).list();
             list.addAll(taskService.createTaskQuery().taskCandidateUser(m.getAssigneeName()).list());
 
-
             list.forEach(t->{
                 Map<String,Object> variables=new HashMap<>();
                 String msg= (String) taskService.getVariable(t.getId(),"message");
@@ -56,7 +55,6 @@ public class RabbitmqScheduled {
                 logger.info(msg);
                 variables.put("message",msg);
                 taskService.complete(t.getId(),variables);
-
             });
         });
 
