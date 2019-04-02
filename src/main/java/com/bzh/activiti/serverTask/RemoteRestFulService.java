@@ -87,3 +87,4 @@ public class RemoteRestFulService {
         return strmap;
     }
 }
+//${remoteRestFulService.businessInvoke(execution,"modifyUser","{username:'@applyUser',applySystemCode:'@applySystemCode'}")}

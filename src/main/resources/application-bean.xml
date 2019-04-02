@@ -66,6 +66,28 @@
         </property>
     </bean>
 
+    <bean id="modifyUser" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
+        <property name="name" value="modifyUser"/>
+        <property name="url" value="@ispIp/activiti/modifyUser"/>
+        <property name="method" value="post" />
+        <property name="head" >
+            <value><![CDATA[
+                    {
+                        "Accept":"application/json",
+                        "Content-Type":"application/json;charset=UTF-8"
+                    }
+            ]]></value>
+        </property>
+        <property name="body" >
+            <value><![CDATA[
+                    {
+                       "username":"@username",
+                       "applySystemCode":"@applySystemCode",
+                    }
+            ]]></value>
+        </property>
+    </bean>
+
     <bean id="synuserresult" class="com.bzh.activiti.entity.InvokeEntityImpl" scope="prototype">
         <property name="name" value="synuserresult"/>
         <property name="url" value="http://127.0.0.1:7001/interfaces"/>

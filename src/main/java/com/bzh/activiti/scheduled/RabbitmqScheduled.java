@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class RabbitmqScheduled {
 
     @Scheduled(fixedDelay=5*ONE_SCEND,initialDelay=20*ONE_SCEND)
     public void schedulQueue(){
-        logger.info(RabbitmqMessage.RabbitQueue.size()+" ----");
+        //logger.info(RabbitmqMessage.RabbitQueue.size()+" ----");
         List<RabbitmqMessage> removeQ=new ArrayList<>();
         RabbitmqMessage.RabbitQueue.forEach(m->{
 
@@ -51,7 +52,9 @@ public class RabbitmqScheduled {
             list.forEach(t->{
                 Map<String,Object> variables=new HashMap<>();
                 String msg= (String) taskService.getVariable(t.getId(),"message");
-                msg=msg+";"+m.getMessage();
+                if(!StringUtils.isEmpty(msg)){
+                    msg=msg+";"+m.getMessage();
+                }
                 logger.info(msg);
                 variables.put("message",msg);
                 taskService.complete(t.getId(),variables);

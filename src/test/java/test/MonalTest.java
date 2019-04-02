@@ -56,6 +56,13 @@ public class MonalTest {
 
         }
     }
+    
+    
+    @Test
+    public void test4(){
+        Matcher m= Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$").matcher("123Azzsdsd");
+        System.out.println("m.find() = " + m.find());
+    }
 
 
 }
