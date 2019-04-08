@@ -17,7 +17,7 @@ spring:
     username: root
     password: 1234
 
-#    url: jdbc:mysql://10.10.12.1:3306,10.10.15.1:3306,10.10.15.2:3306/activiti?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#    url: jdbc:mysql://10.10.12.1:3306,10.10.15.1:3306,10.10.15.2:3306/activiti2?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #    username: isp
 #    password: liuge1
 

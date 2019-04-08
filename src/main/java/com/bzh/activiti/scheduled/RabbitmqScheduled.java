@@ -52,9 +52,8 @@ public class RabbitmqScheduled {
             list.forEach(t->{
                 Map<String,Object> variables=new HashMap<>();
                 String msg= (String) taskService.getVariable(t.getId(),"message");
-                if(!StringUtils.isEmpty(msg)){
-                    msg=msg+";"+m.getMessage();
-                }
+                msg=msg+";"+m.getMessage();
+                msg=msg.replaceFirst("^null;","");
                 logger.info(msg);
                 variables.put("message",msg);
                 taskService.complete(t.getId(),variables);
